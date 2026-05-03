@@ -11,18 +11,16 @@
     :root {
       --bg: #050608;
       --panel: #0d1117;
-      --panel-2: #121821;
       --card: #111720;
-      --card-2: #151d28;
       --line: rgba(255,255,255,0.12);
-      --line-strong: rgba(255,255,255,0.22);
+      --line-strong: rgba(255,255,255,0.24);
       --text: #f4f7fb;
       --muted: #8d9aaa;
       --acid: #b7ff2a;
       --cyan: #14bfae;
       --cyan-hot: #18f0d2;
-      --orange: #ff7a1a;
       --red: #ff334f;
+      --silver: #e8edf3;
       --shadow: 0 18px 55px rgba(0,0,0,0.42);
     }
 
@@ -56,14 +54,10 @@
     button, input, textarea { font: inherit; }
     button { border: 0; cursor: pointer; color: inherit; }
     input, textarea { color-scheme: dark; }
+
     .view { display: none; }
     .view.active { display: block; }
-
-    .view-shell {
-      min-height: 100vh;
-      position: relative;
-      z-index: 1;
-    }
+    .view-shell { min-height: 100vh; position: relative; z-index: 1; }
 
     .brand {
       display: inline-flex;
@@ -149,11 +143,7 @@
       transition: 0.16s ease;
     }
 
-    .input {
-      height: 46px;
-      padding: 0 12px;
-      font-weight: 750;
-    }
+    .input { height: 46px; padding: 0 12px; font-weight: 750; }
 
     .textarea {
       min-height: 96px;
@@ -191,7 +181,6 @@
     }
 
     .login-art {
-      position: relative;
       padding: 42px;
       display: flex;
       flex-direction: column;
@@ -199,7 +188,6 @@
       background:
         linear-gradient(135deg, rgba(183,255,42,0.2), transparent 34%),
         linear-gradient(155deg, #101721, #050608 78%);
-      overflow: hidden;
     }
 
     .login-art h1 {
@@ -230,11 +218,7 @@
       background: rgba(183,255,42,0.075);
     }
 
-    .login-stat strong {
-      display: block;
-      font-size: 20px;
-      font-weight: 950;
-    }
+    .login-stat strong { display: block; font-size: 20px; font-weight: 950; }
 
     .login-stat small {
       color: var(--muted);
@@ -277,11 +261,7 @@
       letter-spacing: 10px;
     }
 
-    .btn-primary {
-      width: 100%;
-      height: 58px;
-      margin-top: 14px;
-    }
+    .btn-primary { width: 100%; height: 58px; margin-top: 14px; }
 
     .login-error {
       min-height: 22px;
@@ -305,11 +285,7 @@
       border-bottom: 1px solid var(--line);
     }
 
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .nav { display: flex; align-items: center; gap: 8px; }
 
     .nav-btn {
       height: 36px;
@@ -355,7 +331,7 @@
       gap: 14px;
     }
 
-    .hero-panel,
+    .deadline-panel,
     .stat-card,
     .search-card,
     .partner-card,
@@ -369,38 +345,56 @@
       box-shadow: var(--shadow);
     }
 
-    .hero-panel {
+    .deadline-panel {
       min-height: 280px;
       padding: 30px;
-      position: relative;
-      overflow: hidden;
       background:
         linear-gradient(135deg, rgba(183,255,42,0.16), transparent 34%),
         linear-gradient(160deg, #141b26, #070a0f);
     }
 
-    .hero-panel h1 {
+    .deadline-panel h1 {
       max-width: 680px;
-      margin-top: 30px;
-      font-size: clamp(42px, 8vw, 82px);
+      margin-top: 26px;
+      font-size: clamp(42px, 7vw, 76px);
       line-height: 0.86;
       letter-spacing: -0.085em;
       text-transform: uppercase;
     }
 
-    .hero-panel p {
-      max-width: 560px;
-      margin-top: 18px;
+    .deadline-panel p {
+      margin-top: 14px;
       color: var(--muted);
       line-height: 1.6;
       font-weight: 650;
     }
 
-    .stats-stack {
+    .deadline-panel-list {
+      margin-top: 18px;
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
+      gap: 8px;
+      max-width: 680px;
     }
+
+    .deadline-panel-task {
+      min-height: 42px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid var(--line);
+      color: var(--text);
+      text-align: left;
+      font-size: 13px;
+      font-weight: 850;
+      transition: 0.16s ease;
+    }
+
+    .deadline-panel-task:hover {
+      transform: translateX(5px);
+      border-color: var(--acid);
+      background: rgba(183,255,42,0.1);
+    }
+
+    .stats-stack { display: grid; grid-template-columns: 1fr; gap: 10px; }
 
     .stat-card {
       padding: 18px;
@@ -438,30 +432,6 @@
       text-transform: uppercase;
     }
 
-    .nearest-list {
-      margin-top: 10px;
-      display: grid;
-      gap: 6px;
-    }
-
-    .nearest-task {
-      width: 100%;
-      min-height: 36px;
-      padding: 8px 10px;
-      background: rgba(5,6,8,0.78);
-      color: var(--text);
-      border: 1px solid rgba(5,6,8,0.18);
-      text-align: left;
-      font-size: 12px;
-      font-weight: 850;
-      transition: 0.16s ease;
-    }
-
-    .nearest-task:hover {
-      transform: translateX(4px);
-      background: #050608;
-    }
-
     .search-block {
       max-width: 1160px;
       margin: 0 auto;
@@ -476,11 +446,7 @@
       position: relative;
     }
 
-    .search-input {
-      height: 52px;
-      padding: 0 14px;
-      font-weight: 850;
-    }
+    .search-input { height: 52px; padding: 0 14px; font-weight: 850; }
 
     .dropdown {
       display: none;
@@ -632,11 +598,7 @@
         #0d1117;
     }
 
-    .partner-title {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+    .partner-title { display: flex; align-items: center; gap: 16px; }
 
     .avatar.big {
       width: 70px;
@@ -664,10 +626,10 @@
     }
 
     .wheel-content {
-      min-height: 650px;
+      min-height: 720px;
       display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 28px;
+      grid-template-columns: 410px 1fr;
+      gap: 34px;
       padding: 24px;
       overflow: hidden;
       background:
@@ -678,71 +640,104 @@
     .wheel-left {
       position: sticky;
       top: 92px;
-      height: 560px;
+      height: 650px;
       display: grid;
       align-items: center;
     }
 
     .arc-stage {
       position: relative;
-      height: 520px;
-      width: 310px;
+      height: 640px;
+      width: 400px;
     }
 
     .arc-line {
       position: absolute;
-      left: -250px;
-      top: 8px;
-      width: 520px;
-      height: 520px;
-      border: 3px solid transparent;
-      border-right-color: #050608;
+      left: -305px;
+      top: 0;
+      width: 650px;
+      height: 650px;
+      border: 5px solid transparent;
+      border-right-color: rgba(235,238,242,0.92);
       border-radius: 50%;
       transform: rotate(0deg);
       transition: transform 0.2s ease-out;
-      filter: drop-shadow(0 0 8px rgba(0,0,0,0.45));
+      filter:
+        drop-shadow(0 0 10px rgba(255,255,255,0.38))
+        drop-shadow(0 0 24px rgba(24,240,210,0.22));
     }
 
     .wheel-node {
       position: absolute;
       left: var(--x);
       top: var(--y);
-      width: 58px;
-      height: 58px;
+      width: 66px;
+      height: 66px;
       display: grid;
       place-items: center;
       border-radius: 50%;
-      background: #f3f5f7;
-      color: #151515;
-      border: 3px solid #050608;
-      font-size: 22px;
+      background: linear-gradient(145deg, #ffffff, #cfd5dd);
+      color: #101318;
+      border: 4px solid #050608;
+      font-size: 24px;
       font-weight: 950;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.38);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.45), 0 0 22px rgba(255,255,255,0.22);
       transition: 0.18s ease;
+      z-index: 2;
     }
 
     .wheel-node.active {
-      background: var(--acid);
-      transform: scale(1.08);
-      box-shadow: 0 0 28px rgba(183,255,42,0.32);
+      background: linear-gradient(145deg, #ffffff, var(--acid));
+      transform: scale(1.1);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.5), 0 0 32px rgba(183,255,42,0.38);
     }
 
     .convo-stack {
-      height: 650px;
+      height: 720px;
       overflow-y: auto;
-      padding: 26px 14px 120px 0;
+      padding: 34px 16px 140px 0;
       scroll-snap-type: y proximity;
     }
 
     .convo-stack::-webkit-scrollbar { width: 8px; }
-    .convo-stack::-webkit-scrollbar-thumb { background: rgba(183,255,42,0.35); }
+    .convo-stack::-webkit-scrollbar-thumb { background: rgba(235,238,242,0.42); }
     .convo-stack::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); }
 
-    .convo-card {
+    .convo-row {
       scroll-snap-align: start;
-      width: min(560px, 100%);
+      width: min(640px, 100%);
+      min-height: 126px;
+      margin: 0 0 20px auto;
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      align-items: start;
+      gap: 14px;
+    }
+
+    .convo-row:nth-child(even) { margin-right: 42px; }
+
+    .inline-node {
+      width: 66px;
+      height: 66px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #ffffff, #cfd5dd);
+      color: #101318;
+      border: 4px solid #050608;
+      font-size: 24px;
+      font-weight: 950;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.45), 0 0 18px rgba(255,255,255,0.2);
+      transform: translateY(18px);
+    }
+
+    .convo-row.active .inline-node {
+      background: linear-gradient(145deg, #ffffff, var(--acid));
+      box-shadow: 0 14px 30px rgba(0,0,0,0.5), 0 0 32px rgba(183,255,42,0.38);
+    }
+
+    .convo-card {
       min-height: 120px;
-      margin: 0 0 18px auto;
       padding: 18px;
       background: var(--cyan);
       color: #09211f;
@@ -752,14 +747,14 @@
       position: relative;
     }
 
-    .convo-card:nth-child(even) { margin-right: 46px; }
-
     .convo-card:hover,
-    .convo-card.highlight {
+    .convo-row.highlight .convo-card {
       transform: translateX(-8px);
       border-color: var(--acid);
       box-shadow: 0 20px 44px rgba(24,240,210,0.18);
     }
+
+    .convo-row.open .convo-card { border-color: var(--acid); }
 
     .convo-date {
       font-size: 20px;
@@ -775,12 +770,21 @@
 
     .convo-body {
       display: none;
-      margin-top: 16px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(5,6,8,0.22);
+      position: fixed;
+      top: 92px;
+      right: 28px;
+      z-index: 40;
+      width: min(430px, calc(100vw - 56px));
+      max-height: calc(100vh - 120px);
+      overflow: auto;
+      padding: 18px;
+      background: #0d1117;
+      color: var(--text);
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.62);
     }
 
-    .convo-card.open .convo-body { display: block; }
+    .convo-row.open .convo-body { display: block; }
 
     .convo-actions {
       display: flex;
@@ -808,39 +812,36 @@
     }
 
     .notes {
-      color: #08211f;
+      color: #dce5f1;
       line-height: 1.58;
       font-weight: 700;
     }
 
     .mini-title {
       margin: 14px 0 8px;
-      color: rgba(5,6,8,0.72);
+      color: var(--muted);
       font-size: 11px;
       font-weight: 950;
       text-transform: uppercase;
       letter-spacing: 0.12em;
     }
 
-    .checklist {
-      display: grid;
-      gap: 8px;
-    }
+    .checklist { display: grid; gap: 8px; }
 
     .check-item {
       display: flex;
       gap: 10px;
       align-items: flex-start;
       padding: 10px;
-      background: rgba(255,255,255,0.38);
-      color: #07120f;
+      background: rgba(255,255,255,0.06);
+      color: #dce5f1;
       font-weight: 800;
       cursor: pointer;
       transition: 0.16s ease;
     }
 
     .check-item:hover {
-      background: rgba(255,255,255,0.62);
+      background: rgba(183,255,42,0.08);
       transform: translateX(3px);
     }
 
@@ -850,25 +851,25 @@
       display: grid;
       place-items: center;
       flex: 0 0 auto;
-      border: 1px solid rgba(5,6,8,0.32);
-      background: rgba(255,255,255,0.45);
+      border: 1px solid var(--line-strong);
+      background: rgba(255,255,255,0.08);
       font-size: 13px;
       font-weight: 950;
     }
 
     .check-item.done {
-      color: rgba(5,6,8,0.58);
+      color: var(--muted);
       text-decoration: line-through;
     }
 
     .check-item.done .box {
-      background: #050608;
-      border-color: #050608;
-      color: var(--acid);
+      background: var(--acid);
+      border-color: var(--acid);
+      color: #050608;
     }
 
     .add-convo {
-      width: min(560px, 100%);
+      width: min(640px, 100%);
       margin: 8px 0 0 auto;
       display: flex;
       justify-content: flex-end;
@@ -961,9 +962,7 @@
 
     .task-card.due {
       border-color: rgba(255,51,79,0.62);
-      background:
-        linear-gradient(90deg, rgba(255,51,79,0.16), transparent 38%),
-        #111720;
+      background: linear-gradient(90deg, rgba(255,51,79,0.16), transparent 38%), #111720;
     }
 
     .task-card.due::before { background: var(--red); }
@@ -1042,15 +1041,17 @@
     @media (max-width: 960px) {
       .login-shell, .hero-grid, .wheel-content { grid-template-columns: 1fr; }
       .wheel-left { display: none; }
-      .convo-stack {
-        height: auto;
-        overflow: visible;
-        padding-right: 0;
-      }
-      .convo-card, .convo-card:nth-child(even), .add-convo {
+      .convo-stack { height: auto; overflow: visible; padding-right: 0; }
+      .convo-row, .convo-row:nth-child(even), .add-convo {
         margin-right: 0;
         margin-left: 0;
         width: 100%;
+      }
+      .convo-body {
+        position: static;
+        width: 100%;
+        max-height: none;
+        margin-top: 14px;
       }
       .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .task-card { grid-template-columns: 1fr; }
@@ -1062,10 +1063,7 @@
         padding-left: 18px;
         padding-right: 18px;
       }
-      .topbar {
-        align-items: flex-start;
-        flex-direction: column;
-      }
+      .topbar { align-items: flex-start; flex-direction: column; }
       .nav {
         width: 100%;
         display: grid;
@@ -1075,11 +1073,10 @@
       .login-card, .login-art { padding: 28px; }
       .login-stat-row, .grid, .search-card { grid-template-columns: 1fr; }
       .search-card .btn { width: 100%; }
-      .partner-title-card {
-        align-items: flex-start;
-        flex-direction: column;
-      }
+      .partner-title-card { align-items: flex-start; flex-direction: column; }
       .wheel-content { padding: 14px; }
+      .convo-row { grid-template-columns: 58px 1fr; gap: 10px; }
+      .inline-node { width: 52px; height: 52px; font-size: 20px; }
     }
   </style>
 </head>
@@ -1124,10 +1121,11 @@
     <main>
       <section class="hero">
         <div class="hero-grid">
-          <div class="hero-panel">
-            <div class="eyebrow"><span>CRM command center</span></div>
-            <h1>Find the right partner <span class="slash">fast.</span></h1>
-            <p>Search, open timelines, track actionables, and keep every partnership moving.</p>
+          <div class="deadline-panel">
+            <div class="eyebrow"><span>Nearest deadline</span></div>
+            <h1>Tasks closest to <span class="slash">deadline.</span></h1>
+            <p id="deadline-summary">Sync data to see the most urgent actionables.</p>
+            <div class="deadline-panel-list" id="deadline-panel-list"></div>
           </div>
 
           <div class="stats-stack">
@@ -1140,8 +1138,8 @@
               <div class="stat-value" id="pending-count">0</div>
             </div>
             <div class="stat-card">
-              <div class="stat-label" id="nearest-deadline-label">Nearest deadline</div>
-              <div class="nearest-list" id="nearest-tasks"></div>
+              <div class="stat-label">Total partners</div>
+              <div class="stat-value" id="partner-total-count">0</div>
             </div>
           </div>
         </div>
@@ -1374,7 +1372,6 @@
 
       try {
         const data = await loadDataJsonp();
-
         if (data.error) throw new Error(data.error);
 
         globalPartners = Array.isArray(data.partners) ? data.partners : [];
@@ -1398,9 +1395,10 @@
 
       $("conversation-count").textContent = globalLogs.length;
       $("pending-count").textContent = pendingTasks.length;
+      $("partner-total-count").textContent = globalPartners.length;
       $("grid-status").textContent = globalPartners.length ? `${pendingTasks.length} pending tasks` : "No partners found";
 
-      renderNearestTasks(pendingTasks);
+      renderDeadlinePanel(pendingTasks);
 
       const grid = $("partner-grid");
       grid.innerHTML = "";
@@ -1431,24 +1429,24 @@
       });
     }
 
-    function renderNearestTasks(tasks) {
-      const box = $("nearest-tasks");
+    function renderDeadlinePanel(tasks) {
+      const list = $("deadline-panel-list");
       const dated = tasks
         .filter(task => task.deadline)
         .sort((a, b) => normalizeDate(a.deadline).localeCompare(normalizeDate(b.deadline)));
 
       if (!dated.length) {
-        $("nearest-deadline-label").textContent = "Nearest deadline";
-        box.innerHTML = '<div class="status">No dated tasks</div>';
+        $("deadline-summary").textContent = "No pending actionables with deadlines yet.";
+        list.innerHTML = "";
         return;
       }
 
       const nearest = normalizeDate(dated[0].deadline);
       const nearestTasks = dated.filter(task => normalizeDate(task.deadline) === nearest);
 
-      $("nearest-deadline-label").textContent = `Nearest deadline - ${fmtDate(nearest)}`;
-      box.innerHTML = nearestTasks.map(task => `
-        <button class="nearest-task" onclick="jumpToTask('${escapeAttr(task.partner)}', '${escapeAttr(task.id)}')">
+      $("deadline-summary").textContent = `${nearestTasks.length} pending actionable${nearestTasks.length === 1 ? "" : "s"} due on ${fmtDate(nearest)}.`;
+      list.innerHTML = nearestTasks.map(task => `
+        <button class="deadline-panel-task" onclick="jumpToTask('${escapeAttr(task.partner)}', '${escapeAttr(task.id)}')">
           ${escapeHtml(task.action)} · ${escapeHtml(task.partner)}
         </button>
       `).join("");
@@ -1543,11 +1541,13 @@
 
       if (focusedGlobalIndex !== null) {
         setTimeout(() => {
-          const card = document.querySelector(`[data-global-index="${focusedGlobalIndex}"]`);
-          if (card) {
-            card.classList.add("open", "highlight");
-            card.scrollIntoView({ behavior: "smooth", block: "center" });
-            setTimeout(() => card.classList.remove("highlight"), 1800);
+          const row = document.querySelector(`[data-global-index="${focusedGlobalIndex}"]`);
+          if (row) {
+            row.classList.add("open", "highlight");
+            const btn = row.querySelector(".mini-btn");
+            if (btn) btn.textContent = "Close";
+            row.scrollIntoView({ behavior: "smooth", block: "center" });
+            setTimeout(() => row.classList.remove("highlight"), 1800);
           }
         }, 120);
       }
@@ -1570,10 +1570,10 @@
 
       for (let i = 0; i < visibleNodes; i++) {
         const ratio = visibleNodes === 1 ? 0.5 : i / (visibleNodes - 1);
-        const angle = -62 + ratio * 124;
-        const radius = 218;
-        const cx = 88;
-        const cy = 260;
+        const angle = -64 + ratio * 128;
+        const radius = 272;
+        const cx = 112;
+        const cy = 320;
         const x = cx + Math.cos(angle * Math.PI / 180) * radius;
         const y = cy + Math.sin(angle * Math.PI / 180) * radius;
 
@@ -1585,56 +1585,60 @@
         nodes.appendChild(node);
       }
 
-      logs.forEach((log) => {
+      logs.forEach((log, index) => {
         const actions = parseItems(log.actionables);
         const notes = String(log.notes || "").trim();
         const deadline = log.deadline || log.actionDeadline || "";
 
-        const card = document.createElement("article");
-        card.className = "convo-card" + (focusedGlobalIndex === log.globalIndex ? " open highlight" : "");
-        card.dataset.globalIndex = log.globalIndex;
+        const row = document.createElement("article");
+        row.className = "convo-row" + (focusedGlobalIndex === log.globalIndex ? " open active" : "");
+        row.dataset.globalIndex = log.globalIndex;
 
-        card.innerHTML = `
-          <div class="convo-date">${fmtDate(log.date)}</div>
-          <div class="convo-subject">${escapeHtml(log.subject || "Untitled conversation")}</div>
+        row.innerHTML = `
+          <div class="inline-node">${index + 1}</div>
 
-          <div class="convo-actions">
-            <button class="mini-btn" onclick="toggleConvo(this)">Open</button>
-            <button class="mini-btn" onclick="startEdit(${log.globalIndex})">Edit note</button>
-          </div>
+          <div class="convo-card">
+            <div class="convo-date">${fmtDate(log.date)}</div>
+            <div class="convo-subject">${escapeHtml(log.subject || "Untitled conversation")}</div>
 
-          <div class="convo-body">
-            <div id="note-view-${log.globalIndex}">
-              <div class="mini-title">Notes</div>
-              <div class="notes">${notes ? escapeHtml(notes).replace(/\n/g, "<br>") : '<span style="color:rgba(5,6,8,0.62)">No notes recorded.</span>'}</div>
-              <div class="mini-title">Actionables ${deadline ? `· deadline ${fmtDate(deadline)}` : ""}</div>
-              <div class="checklist">
-                ${actions.length ? actions.map((action, actionIndex) => renderAction(log.partner, log.id, actionIndex, action)).join("") : '<span style="color:rgba(5,6,8,0.62);font-weight:800">No actionables recorded.</span>'}
-              </div>
+            <div class="convo-actions">
+              <button class="mini-btn" onclick="toggleConvo(this)">Expand</button>
+              <button class="mini-btn" onclick="startEdit(${log.globalIndex})">Edit note</button>
             </div>
 
-            <div id="edit-view-${log.globalIndex}" class="edit-panel" style="display:none">
-              <label class="label" style="color:rgba(5,6,8,0.72)">Subject</label>
-              <input class="input" style="background:rgba(255,255,255,0.55);color:#050608;border-color:rgba(5,6,8,0.28)" id="edit-subject-${log.globalIndex}" value="${escapeAttr(log.subject || "")}">
+            <div class="convo-body">
+              <div id="note-view-${log.globalIndex}">
+                <div class="mini-title">Notes</div>
+                <div class="notes">${notes ? escapeHtml(notes).replace(/\n/g, "<br>") : '<span style="color:var(--muted)">No notes recorded.</span>'}</div>
+                <div class="mini-title">Actionables ${deadline ? `· deadline ${fmtDate(deadline)}` : ""}</div>
+                <div class="checklist">
+                  ${actions.length ? actions.map((action, actionIndex) => renderAction(log.partner, log.id, actionIndex, action)).join("") : '<span style="color:var(--muted);font-weight:800">No actionables recorded.</span>'}
+                </div>
+              </div>
 
-              <label class="label" style="color:rgba(5,6,8,0.72)">Notes</label>
-              <textarea class="textarea" style="background:rgba(255,255,255,0.55);color:#050608;border-color:rgba(5,6,8,0.28)" id="edit-notes-${log.globalIndex}">${escapeHtml(log.notes || "")}</textarea>
+              <div id="edit-view-${log.globalIndex}" class="edit-panel" style="display:none">
+                <label class="label">Subject</label>
+                <input class="input" id="edit-subject-${log.globalIndex}" value="${escapeAttr(log.subject || "")}">
 
-              <label class="label" style="color:rgba(5,6,8,0.72)">Actionables</label>
-              <textarea class="textarea" style="background:rgba(255,255,255,0.55);color:#050608;border-color:rgba(5,6,8,0.28)" id="edit-actions-${log.globalIndex}">${escapeHtml(log.actionables || "")}</textarea>
+                <label class="label">Notes</label>
+                <textarea class="textarea" id="edit-notes-${log.globalIndex}">${escapeHtml(log.notes || "")}</textarea>
 
-              <label class="label" style="color:rgba(5,6,8,0.72)">Deadline</label>
-              <input class="input" type="date" style="background:rgba(255,255,255,0.55);color:#050608;border-color:rgba(5,6,8,0.28)" id="edit-deadline-${log.globalIndex}" value="${normalizeDate(deadline)}">
+                <label class="label">Actionables</label>
+                <textarea class="textarea" id="edit-actions-${log.globalIndex}">${escapeHtml(log.actionables || "")}</textarea>
 
-              <div class="convo-actions">
-                <button class="mini-btn" onclick="saveEdit(${log.globalIndex})">Save edit</button>
-                <button class="mini-btn" onclick="cancelEdit(${log.globalIndex})">Cancel</button>
+                <label class="label">Deadline</label>
+                <input class="input" type="date" id="edit-deadline-${log.globalIndex}" value="${normalizeDate(deadline)}">
+
+                <div class="convo-actions">
+                  <button class="mini-btn" onclick="saveEdit(${log.globalIndex})">Save edit</button>
+                  <button class="mini-btn" onclick="cancelEdit(${log.globalIndex})">Cancel</button>
+                </div>
               </div>
             </div>
           </div>
         `;
 
-        container.appendChild(card);
+        container.appendChild(row);
       });
 
       container.onscroll = updateWheelRotation;
@@ -1643,23 +1647,27 @@
 
     function updateWheelRotation() {
       const container = $("timeline-container");
-      const cards = [...container.querySelectorAll(".convo-card")];
-      if (!cards.length) return;
+      const rows = [...container.querySelectorAll(".convo-row")];
+      if (!rows.length) return;
 
       const progress = container.scrollTop / Math.max(1, container.scrollHeight - container.clientHeight);
-      $("arc-line").style.transform = `rotate(${progress * 130}deg)`;
+      $("arc-line").style.transform = `rotate(${progress * 150}deg)`;
 
       let activeIndex = 0;
       let best = Infinity;
-      const center = container.getBoundingClientRect().top + container.clientHeight * 0.35;
+      const center = container.getBoundingClientRect().top + container.clientHeight * 0.32;
 
-      cards.forEach((card, index) => {
-        const rect = card.getBoundingClientRect();
+      rows.forEach((row, index) => {
+        const rect = row.getBoundingClientRect();
         const dist = Math.abs(rect.top - center);
         if (dist < best) {
           best = dist;
           activeIndex = index;
         }
+      });
+
+      rows.forEach((row, index) => {
+        row.classList.toggle("active", index === activeIndex);
       });
 
       const allNodes = document.querySelectorAll(".wheel-node");
@@ -1669,9 +1677,19 @@
     }
 
     function toggleConvo(button) {
-      const card = button.closest(".convo-card");
-      card.classList.toggle("open");
-      button.textContent = card.classList.contains("open") ? "Close" : "Open";
+      const row = button.closest(".convo-row");
+      const wasOpen = row.classList.contains("open");
+
+      document.querySelectorAll(".convo-row.open").forEach(openRow => {
+        openRow.classList.remove("open");
+        const openBtn = openRow.querySelector(".mini-btn");
+        if (openBtn) openBtn.textContent = "Expand";
+      });
+
+      if (!wasOpen) {
+        row.classList.add("open");
+        button.textContent = "Close";
+      }
     }
 
     function toggleComposer() {

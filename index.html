@@ -336,7 +336,7 @@
     .search-card,
     .partner-card,
     .partner-title-card,
-    .wheel-content,
+    .content-panel,
     .compose,
     .task-card,
     .empty {
@@ -619,156 +619,110 @@
       font-weight: 750;
     }
 
-    .wheel-wrap {
+    .content-wrap {
       max-width: 1160px;
       margin: 0 auto;
       padding: 0 32px 72px;
     }
 
-    .wheel-content {
+    .content-panel {
       min-height: 720px;
-      display: grid;
-      grid-template-columns: 410px 1fr;
-      gap: 34px;
-      padding: 24px;
+      padding: 26px;
+      background: #0d1117;
       overflow: hidden;
-      background:
-        linear-gradient(135deg, rgba(20,191,174,0.1), transparent 34%),
-        #0d1117;
     }
 
-    .wheel-left {
-      position: sticky;
-      top: 92px;
-      height: 650px;
-      display: grid;
-      align-items: center;
+    .timeline-title {
+      text-align: center;
+      margin-bottom: 34px;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 0.9;
+      letter-spacing: -0.075em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-shadow: 0 0 20px rgba(255,255,255,0.16);
     }
 
-    .arc-stage {
+    .flow-timeline {
       position: relative;
-      height: 640px;
-      width: 400px;
+      display: grid;
+      gap: 36px;
+      padding-bottom: 42px;
     }
 
-    .arc-line {
+    .flow-row {
+      position: relative;
+      display: flex;
+      min-height: 116px;
+    }
+
+    .flow-row.left {
+      justify-content: flex-start;
+      padding-left: 0;
+      padding-right: 50%;
+    }
+
+    .flow-row.right {
+      justify-content: flex-end;
+      padding-left: 50%;
+      padding-right: 0;
+    }
+
+    .flow-row::after {
+      content: "";
       position: absolute;
-      left: -305px;
-      top: 0;
-      width: 650px;
-      height: 650px;
-      border: 5px solid transparent;
-      border-right-color: rgba(235,238,242,0.92);
-      border-radius: 50%;
-      transform: rotate(0deg);
-      transition: transform 0.2s ease-out;
-      filter:
-        drop-shadow(0 0 10px rgba(255,255,255,0.38))
-        drop-shadow(0 0 24px rgba(24,240,210,0.22));
+      left: 50%;
+      top: 100%;
+      width: 8px;
+      height: 36px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, var(--silver), rgba(232,237,243,0.45));
+      box-shadow: 0 0 18px rgba(255,255,255,0.22);
     }
 
-    .wheel-node {
-      position: absolute;
-      left: var(--x);
-      top: var(--y);
-      width: 66px;
-      height: 66px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: linear-gradient(145deg, #ffffff, #cfd5dd);
-      color: #101318;
-      border: 4px solid #050608;
-      font-size: 24px;
-      font-weight: 950;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.45), 0 0 22px rgba(255,255,255,0.22);
-      transition: 0.18s ease;
-      z-index: 2;
-    }
+    .flow-row:last-child::after { display: none; }
 
-    .wheel-node.active {
-      background: linear-gradient(145deg, #ffffff, var(--acid));
-      transform: scale(1.1);
-      box-shadow: 0 14px 30px rgba(0,0,0,0.5), 0 0 32px rgba(183,255,42,0.38);
-    }
-
-    .convo-stack {
-      height: 720px;
-      overflow-y: auto;
-      padding: 34px 16px 140px 0;
-      scroll-snap-type: y proximity;
-    }
-
-    .convo-stack::-webkit-scrollbar { width: 8px; }
-    .convo-stack::-webkit-scrollbar-thumb { background: rgba(235,238,242,0.42); }
-    .convo-stack::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); }
-
-    .convo-row {
-      scroll-snap-align: start;
-      width: min(640px, 100%);
-      min-height: 126px;
-      margin: 0 0 20px auto;
-      display: grid;
-      grid-template-columns: 76px 1fr;
-      align-items: start;
-      gap: 14px;
-    }
-
-    .convo-row:nth-child(even) { margin-right: 42px; }
-
-    .inline-node {
-      width: 66px;
-      height: 66px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: linear-gradient(145deg, #ffffff, #cfd5dd);
-      color: #101318;
-      border: 4px solid #050608;
-      font-size: 24px;
-      font-weight: 950;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.45), 0 0 18px rgba(255,255,255,0.2);
-      transform: translateY(18px);
-    }
-
-    .convo-row.active .inline-node {
-      background: linear-gradient(145deg, #ffffff, var(--acid));
-      box-shadow: 0 14px 30px rgba(0,0,0,0.5), 0 0 32px rgba(183,255,42,0.38);
-    }
-
-    .convo-card {
-      min-height: 120px;
-      padding: 18px;
+    .flow-card {
+      width: min(100%, 420px);
+      min-height: 112px;
+      padding: 16px;
       background: var(--cyan);
-      color: #09211f;
+      color: #061513;
       border: 2px solid transparent;
       box-shadow: 0 16px 34px rgba(0,0,0,0.24);
       transition: 0.18s ease;
       position: relative;
     }
 
-    .convo-card:hover,
-    .convo-row.highlight .convo-card {
-      transform: translateX(-8px);
+    .flow-card:hover,
+    .flow-row.highlight .flow-card {
+      transform: translateY(-4px);
       border-color: var(--acid);
       box-shadow: 0 20px 44px rgba(24,240,210,0.18);
     }
 
-    .convo-row.open .convo-card { border-color: var(--acid); }
+    .flow-row.open .flow-card { border-color: var(--acid); }
 
-    .convo-date {
-      font-size: 20px;
+    .flow-date {
+      font-size: 18px;
       font-weight: 950;
       letter-spacing: -0.04em;
     }
 
-    .convo-subject {
+    .flow-subject {
       margin-top: 5px;
-      font-weight: 850;
-      line-height: 1.35;
+      font-weight: 900;
+      line-height: 1.32;
     }
 
-    .convo-body {
+    .flow-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .flow-body {
       display: none;
       position: fixed;
       top: 92px;
@@ -784,22 +738,14 @@
       box-shadow: 0 24px 70px rgba(0,0,0,0.62);
     }
 
-    .convo-row.open .convo-body { display: block; }
-
-    .convo-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 14px;
-    }
+    .flow-row.open .flow-body { display: block; }
 
     .mini-btn {
-      height: 34px;
+      height: 32px;
       padding: 0 10px;
       background: #050608;
       color: white;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 950;
       text-transform: uppercase;
       transition: 0.16s ease;
@@ -869,8 +815,7 @@
     }
 
     .add-convo {
-      width: min(640px, 100%);
-      margin: 8px 0 0 auto;
+      margin-top: 22px;
       display: flex;
       justify-content: flex-end;
     }
@@ -1039,44 +984,57 @@
     }
 
     @media (max-width: 960px) {
-      .login-shell, .hero-grid, .wheel-content { grid-template-columns: 1fr; }
-      .wheel-left { display: none; }
-      .convo-stack { height: auto; overflow: visible; padding-right: 0; }
-      .convo-row, .convo-row:nth-child(even), .add-convo {
-        margin-right: 0;
-        margin-left: 0;
-        width: 100%;
+      .login-shell, .hero-grid { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .task-card { grid-template-columns: 1fr; }
+      .task-meta { justify-content: flex-start; }
+
+      .flow-row.left,
+      .flow-row.right {
+        justify-content: flex-start;
+        padding-left: 0;
+        padding-right: 0;
       }
-      .convo-body {
+
+      .flow-row::after {
+        left: 18px;
+        transform: none;
+      }
+
+      .flow-card {
+        width: 100%;
+        margin-left: 34px;
+      }
+
+      .flow-body {
         position: static;
         width: 100%;
         max-height: none;
         margin-top: 14px;
       }
-      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .task-card { grid-template-columns: 1fr; }
-      .task-meta { justify-content: flex-start; }
     }
 
     @media (max-width: 580px) {
-      .topbar, .hero, .search-block, .content, .partner-hero, .wheel-wrap, .tasks-hero, .tasks-list {
+      .topbar, .hero, .search-block, .content, .partner-hero, .content-wrap, .tasks-hero, .tasks-list {
         padding-left: 18px;
         padding-right: 18px;
       }
+
       .topbar { align-items: flex-start; flex-direction: column; }
+
       .nav {
         width: 100%;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
       }
+
       .nav-btn { width: 100%; }
       .login-card, .login-art { padding: 28px; }
       .login-stat-row, .grid, .search-card { grid-template-columns: 1fr; }
       .search-card .btn { width: 100%; }
       .partner-title-card { align-items: flex-start; flex-direction: column; }
-      .wheel-content { padding: 14px; }
-      .convo-row { grid-template-columns: 58px 1fr; gap: 10px; }
-      .inline-node { width: 52px; height: 52px; font-size: 20px; }
+      .content-panel { padding: 16px; }
+      .timeline-title { text-align: left; }
     }
   </style>
 </head>
@@ -1188,58 +1146,51 @@
         </div>
       </section>
 
-      <section class="wheel-wrap">
-        <div class="wheel-content">
-          <div class="wheel-left">
-            <div class="arc-stage">
-              <div class="arc-line" id="arc-line"></div>
-              <div id="wheel-nodes"></div>
-            </div>
+      <section class="content-wrap">
+        <div class="content-panel">
+          <h2 class="timeline-title">Timeline</h2>
+
+          <div class="section-head" style="margin-top:0">
+            <h2>Conversations</h2>
+            <div class="status" id="timeline-status"></div>
           </div>
 
-          <div>
-            <div class="section-head" style="margin-top:0">
-              <h2>Timeline</h2>
-              <div class="status" id="timeline-status"></div>
-            </div>
+          <div class="flow-timeline" id="timeline-container"></div>
 
-            <div class="convo-stack" id="timeline-container"></div>
-
-            <div class="add-convo">
-              <button class="btn btn-acid" onclick="toggleComposer()">+ Add Convo</button>
-            </div>
-
-            <aside class="compose" id="compose-box">
-              <h2>Log conversation</h2>
-
-              <div class="field">
-                <label class="label" for="newDate">Date</label>
-                <input class="input" type="date" id="newDate">
-              </div>
-
-              <div class="field">
-                <label class="label" for="newSubject">Subject</label>
-                <input class="input" type="text" id="newSubject" placeholder="Q3 planning call">
-              </div>
-
-              <div class="field">
-                <label class="label" for="newNotes">Notes</label>
-                <textarea class="textarea" id="newNotes" rows="4" placeholder="Key discussion points"></textarea>
-              </div>
-
-              <div class="field">
-                <label class="label" for="newAction">Actionables</label>
-                <textarea class="textarea" id="newAction" rows="4" placeholder="One action per line"></textarea>
-              </div>
-
-              <div class="field">
-                <label class="label" for="newDeadline">Actionable deadline</label>
-                <input class="input" type="date" id="newDeadline">
-              </div>
-
-              <button class="btn btn-acid save-btn" onclick="saveLog()">Save Conversation</button>
-            </aside>
+          <div class="add-convo">
+            <button class="btn btn-acid" onclick="toggleComposer()">+ Add Convo</button>
           </div>
+
+          <aside class="compose" id="compose-box">
+            <h2>Log conversation</h2>
+
+            <div class="field">
+              <label class="label" for="newDate">Date</label>
+              <input class="input" type="date" id="newDate">
+            </div>
+
+            <div class="field">
+              <label class="label" for="newSubject">Subject</label>
+              <input class="input" type="text" id="newSubject" placeholder="Q3 planning call">
+            </div>
+
+            <div class="field">
+              <label class="label" for="newNotes">Notes</label>
+              <textarea class="textarea" id="newNotes" rows="4" placeholder="Key discussion points"></textarea>
+            </div>
+
+            <div class="field">
+              <label class="label" for="newAction">Actionables</label>
+              <textarea class="textarea" id="newAction" rows="4" placeholder="One action per line"></textarea>
+            </div>
+
+            <div class="field">
+              <label class="label" for="newDeadline">Actionable deadline</label>
+              <input class="input" type="date" id="newDeadline">
+            </div>
+
+            <button class="btn btn-acid save-btn" onclick="saveLog()">Save Conversation</button>
+          </aside>
         </div>
       </section>
     </main>
@@ -1446,7 +1397,7 @@
 
       $("deadline-summary").textContent = `${nearestTasks.length} pending actionable${nearestTasks.length === 1 ? "" : "s"} due on ${fmtDate(nearest)}.`;
       list.innerHTML = nearestTasks.map(task => `
-        <button class="deadline-panel-task" onclick="jumpToTask('${escapeAttr(task.partner)}', '${escapeAttr(task.id)}')">
+        <button class="deadline-panel-task" onclick="jumpToTask(${attrJs(task.partner)}, ${attrJs(task.id)})">
           ${escapeHtml(task.action)} · ${escapeHtml(task.partner)}
         </button>
       `).join("");
@@ -1526,9 +1477,9 @@
       $("partner-title").textContent = partnerName;
       $("partner-subtitle").textContent = "Partner profile and relationship history";
       $("partner-total").textContent = logs.length + " conversation" + (logs.length === 1 ? "" : "s");
-      $("timeline-status").textContent = logs.length ? "Scroll the wheel" : "No conversations yet";
+      $("timeline-status").textContent = logs.length ? `${logs.length} conversation${logs.length === 1 ? "" : "s"}` : "No conversations yet";
 
-      renderWheelTimeline(logs);
+      renderFlowTimeline(logs);
 
       $("newDate").valueAsDate = new Date();
       $("newSubject").value = "";
@@ -1553,60 +1504,36 @@
       }
     }
 
-    function renderWheelTimeline(logs) {
+    function renderFlowTimeline(logs) {
       const container = $("timeline-container");
-      const nodes = $("wheel-nodes");
-
       container.innerHTML = "";
-      nodes.innerHTML = "";
 
       if (!logs.length) {
         container.innerHTML = '<div class="empty">No conversations recorded for this partner yet.</div>';
-        $("arc-line").style.transform = "rotate(0deg)";
         return;
-      }
-
-      const visibleNodes = Math.min(logs.length, 7);
-
-      for (let i = 0; i < visibleNodes; i++) {
-        const ratio = visibleNodes === 1 ? 0.5 : i / (visibleNodes - 1);
-        const angle = -64 + ratio * 128;
-        const radius = 272;
-        const cx = 112;
-        const cy = 320;
-        const x = cx + Math.cos(angle * Math.PI / 180) * radius;
-        const y = cy + Math.sin(angle * Math.PI / 180) * radius;
-
-        const node = document.createElement("div");
-        node.className = "wheel-node" + (i === 0 ? " active" : "");
-        node.style.setProperty("--x", `${x}px`);
-        node.style.setProperty("--y", `${y}px`);
-        node.textContent = i + 1;
-        nodes.appendChild(node);
       }
 
       logs.forEach((log, index) => {
         const actions = parseItems(log.actionables);
         const notes = String(log.notes || "").trim();
         const deadline = log.deadline || log.actionDeadline || "";
+        const direction = index % 2 === 0 ? "left" : "right";
 
         const row = document.createElement("article");
-        row.className = "convo-row" + (focusedGlobalIndex === log.globalIndex ? " open active" : "");
+        row.className = `flow-row ${direction}` + (focusedGlobalIndex === log.globalIndex ? " open highlight" : "");
         row.dataset.globalIndex = log.globalIndex;
 
         row.innerHTML = `
-          <div class="inline-node">${index + 1}</div>
+          <div class="flow-card">
+            <div class="flow-date">${fmtDate(log.date)}</div>
+            <div class="flow-subject">${escapeHtml(log.subject || "Untitled conversation")}</div>
 
-          <div class="convo-card">
-            <div class="convo-date">${fmtDate(log.date)}</div>
-            <div class="convo-subject">${escapeHtml(log.subject || "Untitled conversation")}</div>
-
-            <div class="convo-actions">
+            <div class="flow-actions">
               <button class="mini-btn" onclick="toggleConvo(this)">Expand</button>
               <button class="mini-btn" onclick="startEdit(${log.globalIndex})">Edit note</button>
             </div>
 
-            <div class="convo-body">
+            <div class="flow-body">
               <div id="note-view-${log.globalIndex}">
                 <div class="mini-title">Notes</div>
                 <div class="notes">${notes ? escapeHtml(notes).replace(/\n/g, "<br>") : '<span style="color:var(--muted)">No notes recorded.</span>'}</div>
@@ -1618,7 +1545,7 @@
 
               <div id="edit-view-${log.globalIndex}" class="edit-panel" style="display:none">
                 <label class="label">Subject</label>
-                <input class="input" id="edit-subject-${log.globalIndex}" value="${escapeAttr(log.subject || "")}">
+                <input class="input" id="edit-subject-${log.globalIndex}" value="${escapeHtml(log.subject || "")}">
 
                 <label class="label">Notes</label>
                 <textarea class="textarea" id="edit-notes-${log.globalIndex}">${escapeHtml(log.notes || "")}</textarea>
@@ -1629,7 +1556,7 @@
                 <label class="label">Deadline</label>
                 <input class="input" type="date" id="edit-deadline-${log.globalIndex}" value="${normalizeDate(deadline)}">
 
-                <div class="convo-actions">
+                <div class="flow-actions">
                   <button class="mini-btn" onclick="saveEdit(${log.globalIndex})">Save edit</button>
                   <button class="mini-btn" onclick="cancelEdit(${log.globalIndex})">Cancel</button>
                 </div>
@@ -1640,47 +1567,13 @@
 
         container.appendChild(row);
       });
-
-      container.onscroll = updateWheelRotation;
-      updateWheelRotation();
-    }
-
-    function updateWheelRotation() {
-      const container = $("timeline-container");
-      const rows = [...container.querySelectorAll(".convo-row")];
-      if (!rows.length) return;
-
-      const progress = container.scrollTop / Math.max(1, container.scrollHeight - container.clientHeight);
-      $("arc-line").style.transform = `rotate(${progress * 150}deg)`;
-
-      let activeIndex = 0;
-      let best = Infinity;
-      const center = container.getBoundingClientRect().top + container.clientHeight * 0.32;
-
-      rows.forEach((row, index) => {
-        const rect = row.getBoundingClientRect();
-        const dist = Math.abs(rect.top - center);
-        if (dist < best) {
-          best = dist;
-          activeIndex = index;
-        }
-      });
-
-      rows.forEach((row, index) => {
-        row.classList.toggle("active", index === activeIndex);
-      });
-
-      const allNodes = document.querySelectorAll(".wheel-node");
-      allNodes.forEach((node, index) => {
-        node.classList.toggle("active", index === activeIndex % Math.max(1, allNodes.length));
-      });
     }
 
     function toggleConvo(button) {
-      const row = button.closest(".convo-row");
+      const row = button.closest(".flow-row");
       const wasOpen = row.classList.contains("open");
 
-      document.querySelectorAll(".convo-row.open").forEach(openRow => {
+      document.querySelectorAll(".flow-row.open").forEach(openRow => {
         openRow.classList.remove("open");
         const openBtn = openRow.querySelector(".mini-btn");
         if (openBtn) openBtn.textContent = "Expand";
@@ -1704,7 +1597,7 @@
       const done = !!checkedStates[key];
 
       return `
-        <div class="check-item ${done ? "done" : ""}" onclick="toggleCheck('${escapeAttr(key)}', this)">
+        <div class="check-item ${done ? "done" : ""}" onclick="toggleCheck(${attrJs(key)}, this)">
           <span class="box">${done ? "✓" : ""}</span>
           <span>${escapeHtml(action)}</span>
         </div>
@@ -1814,8 +1707,8 @@
           <div class="task-meta">
             <span class="task-chip">${fmtDate(task.date)}</span>
             <span class="task-chip deadline">${task.deadline ? fmtDate(task.deadline) : "No deadline"}</span>
-            <button class="btn" onclick="jumpToTask('${escapeAttr(task.partner)}', '${escapeAttr(task.id)}')">Open note</button>
-            <button class="btn" onclick="completeTask('${escapeAttr(task.key)}')">Done</button>
+            <button class="btn" onclick="jumpToTask(${attrJs(task.partner)}, ${attrJs(task.id)})">Open note</button>
+            <button class="btn" onclick="completeTask(${attrJs(task.key)})">Done</button>
           </div>
         </article>
       `).join("");
@@ -1883,11 +1776,8 @@
       }[char]));
     }
 
-    function escapeAttr(value) {
-      return String(value ?? "")
-        .replace(/\\/g, "\\\\")
-        .replace(/'/g, "\\'")
-        .replace(/"/g, "&quot;");
+    function attrJs(value) {
+      return escapeHtml(JSON.stringify(String(value ?? "")));
     }
   </script>
 </body>

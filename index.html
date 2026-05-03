@@ -19,17 +19,15 @@
       --text: #f4f7fb;
       --muted: #8d9aaa;
       --acid: #b7ff2a;
-      --cyan: #18f0d2;
+      --cyan: #14bfae;
+      --cyan-hot: #18f0d2;
       --orange: #ff7a1a;
       --red: #ff334f;
-      --yellow: #ffd166;
       --shadow: 0 18px 55px rgba(0,0,0,0.42);
-      --r: 8px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { background: var(--bg); }
+    html { background: var(--bg); scroll-behavior: smooth; }
 
     body {
       min-height: 100vh;
@@ -132,18 +130,6 @@
         linear-gradient(135deg, rgba(183,255,42,0.2), transparent 34%),
         linear-gradient(155deg, #101721, #050608 78%);
       overflow: hidden;
-    }
-
-    .login-art::after {
-      content: "";
-      position: absolute;
-      right: -70px;
-      bottom: -80px;
-      width: 360px;
-      height: 360px;
-      border: 1px solid rgba(183,255,42,0.24);
-      transform: rotate(18deg);
-      background: repeating-linear-gradient(45deg, rgba(183,255,42,0.13) 0 8px, transparent 8px 18px);
     }
 
     .login-art h1 {
@@ -295,26 +281,8 @@
     .btn-acid {
       border: 0;
       color: #050608;
-      background: linear-gradient(135deg, var(--acid), var(--cyan));
+      background: linear-gradient(135deg, var(--acid), var(--cyan-hot));
       box-shadow: 0 16px 34px rgba(24,240,210,0.17);
-    }
-
-    .btn-acid::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,0.55), transparent 78%);
-      transform: translateX(-120%);
-    }
-
-    .btn-acid:hover {
-      background: linear-gradient(135deg, var(--acid), var(--cyan));
-      box-shadow: 0 22px 44px rgba(183,255,42,0.22);
-    }
-
-    .btn-acid:hover::after {
-      transform: translateX(120%);
-      transition: transform 0.7s ease;
     }
 
     .btn-primary {
@@ -392,16 +360,16 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 14px;
     }
 
     .hero-panel,
-    .score-panel,
+    .stat-card,
     .search-card,
     .partner-card,
     .partner-title-card,
-    .log-card,
+    .wheel-content,
     .compose,
     .task-card,
     .empty {
@@ -411,7 +379,7 @@
     }
 
     .hero-panel {
-      min-height: 310px;
+      min-height: 280px;
       padding: 30px;
       position: relative;
       overflow: hidden;
@@ -420,21 +388,10 @@
         linear-gradient(160deg, #141b26, #070a0f);
     }
 
-    .hero-panel::after {
-      content: "";
-      position: absolute;
-      right: -40px;
-      top: 30px;
-      width: 220px;
-      height: 220px;
-      border: 1px solid rgba(24,240,210,0.22);
-      transform: rotate(24deg);
-    }
-
     .hero-panel h1 {
       max-width: 680px;
       margin-top: 30px;
-      font-size: clamp(42px, 8vw, 88px);
+      font-size: clamp(42px, 8vw, 82px);
       line-height: 0.86;
       letter-spacing: -0.085em;
       text-transform: uppercase;
@@ -448,39 +405,70 @@
       font-weight: 650;
     }
 
-    .score-panel {
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background:
-        linear-gradient(135deg, var(--acid), var(--cyan));
+    .stats-stack {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .stat-card {
+      padding: 18px;
+      min-height: 86px;
+      transition: 0.16s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(183,255,42,0.45);
+    }
+
+    .stat-card.acid {
       color: #050608;
-      transition: 0.18s ease;
+      background: linear-gradient(135deg, var(--acid), var(--cyan-hot));
+      border-color: transparent;
     }
 
-    .score-panel:hover {
-      transform: translateY(-5px) skewX(-1deg);
-    }
-
-    .score-panel small {
+    .stat-label {
       font-size: 11px;
       font-weight: 950;
       text-transform: uppercase;
       letter-spacing: 0.12em;
+      color: var(--muted);
     }
 
-    .score-number {
-      font-size: 88px;
-      line-height: 0.86;
+    .stat-card.acid .stat-label { color: rgba(5,6,8,0.72); }
+
+    .stat-value {
+      margin-top: 8px;
+      font-size: 34px;
+      line-height: 0.95;
       font-weight: 950;
-      letter-spacing: -0.09em;
+      letter-spacing: -0.07em;
+      text-transform: uppercase;
     }
 
-    .score-panel p {
-      color: rgba(5,6,8,0.72);
+    .nearest-list {
+      margin-top: 10px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .nearest-task {
+      width: 100%;
+      min-height: 36px;
+      padding: 8px 10px;
+      background: rgba(5,6,8,0.78);
+      color: var(--text);
+      border: 1px solid rgba(5,6,8,0.18);
+      text-align: left;
+      font-size: 12px;
       font-weight: 850;
-      line-height: 1.45;
+      transition: 0.16s ease;
+    }
+
+    .nearest-task:hover {
+      transform: translateX(4px);
+      background: #050608;
     }
 
     .search-block {
@@ -611,7 +599,7 @@
       position: absolute;
       inset: auto 0 0 0;
       height: 3px;
-      background: linear-gradient(90deg, var(--acid), var(--cyan));
+      background: linear-gradient(90deg, var(--acid), var(--cyan-hot));
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.18s ease;
@@ -623,9 +611,7 @@
       background: #151d28;
     }
 
-    .partner-card:hover::after {
-      transform: scaleX(1);
-    }
+    .partner-card:hover::after { transform: scaleX(1); }
 
     .partner-top {
       display: flex;
@@ -696,91 +682,173 @@
       font-weight: 750;
     }
 
-    .timeline-layout {
+    .wheel-wrap {
       max-width: 1160px;
       margin: 0 auto;
       padding: 0 32px 72px;
-      display: grid;
-      grid-template-columns: 1fr 370px;
-      gap: 14px;
-      align-items: start;
     }
 
-    .timeline {
+    .wheel-content {
+      min-height: 650px;
       display: grid;
-      gap: 12px;
-    }
-
-    .log-card {
+      grid-template-columns: 320px 1fr;
+      gap: 28px;
+      padding: 24px;
       overflow: hidden;
-      transition: 0.16s ease;
+      background:
+        linear-gradient(135deg, rgba(20,191,174,0.1), transparent 34%),
+        #0d1117;
     }
 
-    .log-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(24,240,210,0.44);
-    }
-
-    .log-head {
-      width: 100%;
+    .wheel-left {
+      position: sticky;
+      top: 92px;
+      height: 560px;
       display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 12px;
       align-items: center;
-      padding: 16px;
-      background: transparent;
-      color: var(--text);
-      text-align: left;
     }
 
-    .date-chip {
-      padding: 7px 10px;
-      background: rgba(24,240,210,0.1);
-      color: var(--cyan);
-      border: 1px solid rgba(24,240,210,0.24);
-      font-size: 12px;
+    .arc-stage {
+      position: relative;
+      height: 520px;
+      width: 310px;
+    }
+
+    .arc-line {
+      position: absolute;
+      left: -250px;
+      top: 8px;
+      width: 520px;
+      height: 520px;
+      border: 3px solid transparent;
+      border-right-color: #050608;
+      border-radius: 50%;
+      transform: rotate(0deg);
+      transition: transform 0.2s ease-out;
+      filter: drop-shadow(0 0 8px rgba(0,0,0,0.45));
+    }
+
+    .wheel-node {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #f3f5f7;
+      color: #151515;
+      border: 3px solid #050608;
+      font-size: 22px;
       font-weight: 950;
-      white-space: nowrap;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.38);
+      transition: 0.18s ease;
     }
 
-    .log-subject {
+    .wheel-node.active {
+      background: var(--acid);
+      transform: scale(1.08);
+      box-shadow: 0 0 28px rgba(183,255,42,0.32);
+    }
+
+    .convo-stack {
+      height: 650px;
+      overflow-y: auto;
+      padding: 26px 14px 120px 0;
+      scroll-snap-type: y proximity;
+    }
+
+    .convo-stack::-webkit-scrollbar { width: 8px; }
+    .convo-stack::-webkit-scrollbar-thumb { background: rgba(183,255,42,0.35); }
+    .convo-stack::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); }
+
+    .convo-card {
+      scroll-snap-align: start;
+      width: min(560px, 100%);
+      min-height: 120px;
+      margin: 0 0 18px auto;
+      padding: 18px;
+      background: var(--cyan);
+      color: #09211f;
+      border: 2px solid transparent;
+      box-shadow: 0 16px 34px rgba(0,0,0,0.24);
+      transition: 0.18s ease;
+      position: relative;
+    }
+
+    .convo-card:nth-child(even) {
+      margin-right: 46px;
+    }
+
+    .convo-card:hover,
+    .convo-card.highlight {
+      transform: translateX(-8px);
+      border-color: var(--acid);
+      box-shadow: 0 20px 44px rgba(24,240,210,0.18);
+    }
+
+    .convo-date {
+      font-size: 20px;
       font-weight: 950;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.04em;
     }
 
-    .chev {
-      color: var(--muted);
-      font-weight: 950;
-      transition: transform 0.16s ease;
+    .convo-subject {
+      margin-top: 5px;
+      font-weight: 850;
+      line-height: 1.35;
     }
 
-    .log-card.open .chev {
-      transform: rotate(180deg);
-    }
-
-    .log-body {
+    .convo-body {
       display: none;
-      padding: 0 16px 16px;
-      border-top: 1px solid var(--line);
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(5,6,8,0.22);
     }
 
-    .log-card.open .log-body {
+    .convo-card.open .convo-body {
       display: block;
     }
 
+    .convo-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .mini-btn {
+      height: 34px;
+      padding: 0 10px;
+      background: #050608;
+      color: white;
+      font-size: 11px;
+      font-weight: 950;
+      text-transform: uppercase;
+      transition: 0.16s ease;
+    }
+
+    .mini-btn:hover {
+      transform: translateY(-2px);
+      background: var(--acid);
+      color: #050608;
+    }
+
+    .notes {
+      color: #08211f;
+      line-height: 1.58;
+      font-weight: 700;
+    }
+
     .mini-title {
-      margin: 16px 0 8px;
-      color: var(--muted);
+      margin: 14px 0 8px;
+      color: rgba(5,6,8,0.72);
       font-size: 11px;
       font-weight: 950;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-    }
-
-    .notes {
-      color: #dce5f1;
-      line-height: 1.62;
-      font-weight: 650;
     }
 
     .checklist {
@@ -793,15 +861,15 @@
       gap: 10px;
       align-items: flex-start;
       padding: 10px;
-      background: rgba(255,255,255,0.055);
-      color: #dce5f1;
-      font-weight: 750;
+      background: rgba(255,255,255,0.38);
+      color: #07120f;
+      font-weight: 800;
       cursor: pointer;
       transition: 0.16s ease;
     }
 
     .check-item:hover {
-      background: rgba(183,255,42,0.08);
+      background: rgba(255,255,255,0.62);
       transform: translateX(3px);
     }
 
@@ -811,27 +879,38 @@
       display: grid;
       place-items: center;
       flex: 0 0 auto;
-      border: 1px solid var(--line-strong);
-      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(5,6,8,0.32);
+      background: rgba(255,255,255,0.45);
       font-size: 13px;
       font-weight: 950;
     }
 
     .check-item.done {
-      color: var(--muted);
+      color: rgba(5,6,8,0.58);
       text-decoration: line-through;
     }
 
     .check-item.done .box {
-      background: var(--acid);
-      border-color: var(--acid);
-      color: #050608;
+      background: #050608;
+      border-color: #050608;
+      color: var(--acid);
+    }
+
+    .add-convo {
+      width: min(560px, 100%);
+      margin: 8px 0 0 auto;
+      display: flex;
+      justify-content: flex-end;
     }
 
     .compose {
-      position: sticky;
-      top: 86px;
+      display: none;
+      margin-top: 16px;
       padding: 18px;
+    }
+
+    .compose.active {
+      display: block;
     }
 
     .compose h2 {
@@ -841,9 +920,7 @@
       text-transform: uppercase;
     }
 
-    .field {
-      margin-bottom: 12px;
-    }
+    .field { margin-bottom: 12px; }
 
     .save-btn {
       width: 100%;
@@ -851,9 +928,13 @@
       margin-top: 4px;
     }
 
-    .tasks-page {
-      min-height: 100vh;
+    .edit-panel {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
     }
+
+    .tasks-page { min-height: 100vh; }
 
     .tasks-hero {
       max-width: 1160px;
@@ -926,9 +1007,7 @@
         #111720;
     }
 
-    .task-card.due::before {
-      background: var(--red);
-    }
+    .task-card.due::before { background: var(--red); }
 
     .task-main h3 {
       font-size: 17px;
@@ -1001,19 +1080,33 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 960px) {
       .login-shell,
       .hero-grid,
-      .timeline-layout {
+      .wheel-content {
         grid-template-columns: 1fr;
+      }
+
+      .wheel-left {
+        display: none;
+      }
+
+      .convo-stack {
+        height: auto;
+        overflow: visible;
+        padding-right: 0;
+      }
+
+      .convo-card,
+      .convo-card:nth-child(even),
+      .add-convo {
+        margin-right: 0;
+        margin-left: 0;
+        width: 100%;
       }
 
       .grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .compose {
-        position: static;
       }
 
       .task-card {
@@ -1031,7 +1124,7 @@
       .search-block,
       .content,
       .partner-hero,
-      .timeline-layout,
+      .wheel-wrap,
       .tasks-hero,
       .tasks-list {
         padding-left: 18px;
@@ -1071,6 +1164,10 @@
       .partner-title-card {
         align-items: flex-start;
         flex-direction: column;
+      }
+
+      .wheel-content {
+        padding: 14px;
       }
     }
   </style>
@@ -1121,10 +1218,19 @@
             <p>Search, open timelines, track actionables, and keep every partnership moving.</p>
           </div>
 
-          <div class="score-panel">
-            <small>Total conversations</small>
-            <div class="score-number" id="conversation-count">0</div>
-            <p id="sync-status">Ready to sync partner data.</p>
+          <div class="stats-stack">
+            <div class="stat-card acid">
+              <div class="stat-label">Total conversations</div>
+              <div class="stat-value" id="conversation-count">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Pending tasks</div>
+              <div class="stat-value" id="pending-count">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label" id="nearest-deadline-label">Nearest deadline</div>
+              <div class="nearest-list" id="nearest-tasks"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -1172,45 +1278,59 @@
         </div>
       </section>
 
-      <section class="timeline-layout">
-        <div>
-          <div class="section-head" style="margin-top:0">
-            <h2>Timeline</h2>
-            <div class="status" id="timeline-status"></div>
+      <section class="wheel-wrap">
+        <div class="wheel-content">
+          <div class="wheel-left">
+            <div class="arc-stage">
+              <div class="arc-line" id="arc-line"></div>
+              <div id="wheel-nodes"></div>
+            </div>
           </div>
-          <div class="timeline" id="timeline-container"></div>
+
+          <div>
+            <div class="section-head" style="margin-top:0">
+              <h2>Timeline</h2>
+              <div class="status" id="timeline-status"></div>
+            </div>
+
+            <div class="convo-stack" id="timeline-container"></div>
+
+            <div class="add-convo">
+              <button class="btn btn-acid" onclick="toggleComposer()">+ Add Convo</button>
+            </div>
+
+            <aside class="compose" id="compose-box">
+              <h2>Log conversation</h2>
+
+              <div class="field">
+                <label class="label" for="newDate">Date</label>
+                <input class="input" type="date" id="newDate">
+              </div>
+
+              <div class="field">
+                <label class="label" for="newSubject">Subject</label>
+                <input class="input" type="text" id="newSubject" placeholder="Q3 planning call">
+              </div>
+
+              <div class="field">
+                <label class="label" for="newNotes">Notes</label>
+                <textarea class="textarea" id="newNotes" rows="4" placeholder="Key discussion points"></textarea>
+              </div>
+
+              <div class="field">
+                <label class="label" for="newAction">Actionables</label>
+                <textarea class="textarea" id="newAction" rows="4" placeholder="One action per line"></textarea>
+              </div>
+
+              <div class="field">
+                <label class="label" for="newDeadline">Actionable deadline</label>
+                <input class="input" type="date" id="newDeadline">
+              </div>
+
+              <button class="btn btn-acid save-btn" onclick="saveLog()">Save Conversation</button>
+            </aside>
+          </div>
         </div>
-
-        <aside class="compose">
-          <h2>Log conversation</h2>
-
-          <div class="field">
-            <label class="label" for="newDate">Date</label>
-            <input class="input" type="date" id="newDate">
-          </div>
-
-          <div class="field">
-            <label class="label" for="newSubject">Subject</label>
-            <input class="input" type="text" id="newSubject" placeholder="Q3 planning call">
-          </div>
-
-          <div class="field">
-            <label class="label" for="newNotes">Notes</label>
-            <textarea class="textarea" id="newNotes" rows="4" placeholder="Key discussion points"></textarea>
-          </div>
-
-          <div class="field">
-            <label class="label" for="newAction">Actionables</label>
-            <textarea class="textarea" id="newAction" rows="4" placeholder="One action per line"></textarea>
-          </div>
-
-          <div class="field">
-            <label class="label" for="newDeadline">Actionable deadline</label>
-            <input class="input" type="date" id="newDeadline">
-          </div>
-
-          <button class="btn btn-acid save-btn" onclick="saveLog()">Save Conversation</button>
-        </aside>
       </section>
     </main>
   </section>
@@ -1247,6 +1367,7 @@
     let globalPartners = [];
     let globalLogs = [];
     let activePartner = "";
+    let focusedGlobalIndex = null;
     let checkedStates = JSON.parse(localStorage.getItem("checkedStates") || "{}");
 
     const $ = id => document.getElementById(id);
@@ -1288,11 +1409,6 @@
       $(id).classList.add("active");
     }
 
-    function setDashboardNav() {
-      $("nav-dashboard")?.classList.add("active");
-      $("nav-tasks")?.classList.remove("active");
-    }
-
     $("login-form").addEventListener("submit", event => {
       event.preventDefault();
       const passcode = $("passcode");
@@ -1315,7 +1431,6 @@
     }
 
     async function fetchData() {
-      $("sync-status").textContent = "Syncing partner data...";
       $("grid-status").textContent = "Loading partners...";
 
       try {
@@ -1331,16 +1446,17 @@
         showToast("Partner data synced");
       } catch (err) {
         console.error(err);
-        $("sync-status").textContent = "Could not sync. Check Apps Script deployment.";
         $("grid-status").textContent = "Sync failed";
         showToast("Sync failed");
       }
     }
 
     function renderHome() {
+      const pendingTasks = getPendingTasks();
       $("conversation-count").textContent = globalLogs.length;
-      $("sync-status").textContent = globalPartners.length ? "Latest partner data is ready." : "No partner data found.";
-      $("grid-status").textContent = globalPartners.length ? `${getPendingTasks().length} pending tasks` : "No partners found";
+      $("pending-count").textContent = pendingTasks.length;
+      $("grid-status").textContent = globalPartners.length ? `${pendingTasks.length} pending tasks` : "No partners found";
+      renderNearestTasks(pendingTasks);
 
       const grid = $("partner-grid");
       grid.innerHTML = "";
@@ -1352,7 +1468,7 @@
 
       globalPartners.slice(0, 12).forEach(partner => {
         const logs = globalLogs.filter(log => log.partner === partner);
-        const pending = getPendingTasks().filter(task => task.partner === partner).length;
+        const pending = pendingTasks.filter(task => task.partner === partner).length;
         const card = document.createElement("button");
         card.className = "partner-card";
         card.innerHTML = `
@@ -1368,6 +1484,27 @@
         card.onclick = () => openPartner(partner);
         grid.appendChild(card);
       });
+    }
+
+    function renderNearestTasks(tasks) {
+      const box = $("nearest-tasks");
+      const dated = tasks.filter(task => task.deadline).sort((a, b) => normalizeDate(a.deadline).localeCompare(normalizeDate(b.deadline)));
+
+      if (!dated.length) {
+        $("nearest-deadline-label").textContent = "Nearest deadline";
+        box.innerHTML = '<div class="status">No dated tasks</div>';
+        return;
+      }
+
+      const nearest = normalizeDate(dated[0].deadline);
+      const nearestTasks = dated.filter(task => normalizeDate(task.deadline) === nearest);
+
+      $("nearest-deadline-label").textContent = `Nearest deadline - ${fmtDate(nearest)}`;
+      box.innerHTML = nearestTasks.map(task => `
+        <button class="nearest-task" onclick="jumpToTask('${escapeAttr(task.partner)}', ${task.globalIndex})">
+          ${escapeHtml(task.action)} · ${escapeHtml(task.partner)}
+        </button>
+      `).join("");
     }
 
     const searchInput = $("searchInput");
@@ -1421,63 +1558,175 @@
     function goHome() {
       searchInput.value = "";
       dropdown.style.display = "none";
-      setDashboardNav();
       showView("home-view");
       renderHome();
     }
 
-    function openPartner(partnerName) {
+    function getPartnerLogs(partnerName) {
+      return globalLogs
+        .map((log, globalIndex) => ({ ...log, globalIndex }))
+        .filter(log => log.partner === partnerName)
+        .sort((a, b) => {
+          const da = normalizeDate(a.date);
+          const db = normalizeDate(b.date);
+          return db.localeCompare(da);
+        });
+    }
+
+    function openPartner(partnerName, focusIndex = null) {
       activePartner = partnerName;
-      const logs = globalLogs.filter(log => log.partner === partnerName);
+      focusedGlobalIndex = focusIndex;
+      const logs = getPartnerLogs(partnerName);
 
       $("partner-avatar").textContent = initials(partnerName);
       $("partner-title").textContent = partnerName;
       $("partner-subtitle").textContent = "Partner profile and relationship history";
       $("partner-total").textContent = logs.length + " conversation" + (logs.length === 1 ? "" : "s");
-      $("timeline-status").textContent = logs.length ? "Most recent entries first" : "No conversations yet";
+      $("timeline-status").textContent = logs.length ? "Scroll the wheel" : "No conversations yet";
 
-      const container = $("timeline-container");
-      container.innerHTML = "";
-
-      if (!logs.length) {
-        container.innerHTML = '<div class="empty">No conversations recorded for this partner yet.</div>';
-      }
-
-      logs.forEach((log, index) => {
-        const actions = parseItems(log.actionables);
-        const notes = String(log.notes || "").trim();
-        const deadline = log.deadline || log.actionDeadline || "";
-
-        const card = document.createElement("article");
-        card.className = "log-card" + (index === 0 ? " open" : "");
-        card.innerHTML = `
-          <button class="log-head" onclick="this.closest('.log-card').classList.toggle('open')">
-            <span class="date-chip">${fmtDate(log.date)}</span>
-            <span class="log-subject">${escapeHtml(log.subject || "Untitled conversation")}</span>
-            <span class="chev">v</span>
-          </button>
-          <div class="log-body">
-            <div class="mini-title">Notes</div>
-            <div class="notes">${notes ? escapeHtml(notes).replace(/\n/g, "<br>") : '<span style="color:var(--muted)">No notes recorded.</span>'}</div>
-            <div class="mini-title">Actionables ${deadline ? `- deadline ${fmtDate(deadline)}` : ""}</div>
-            <div class="checklist">
-              ${actions.length ? actions.map((action, actionIndex) => renderAction(partnerName, index, actionIndex, action)).join("") : '<span style="color:var(--muted);font-weight:700">No actionables recorded.</span>'}
-            </div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
+      renderWheelTimeline(logs);
 
       $("newDate").valueAsDate = new Date();
       $("newSubject").value = "";
       $("newNotes").value = "";
       $("newAction").value = "";
       $("newDeadline").value = "";
+      $("compose-box").classList.remove("active");
+
       showView("partner-view");
+
+      if (focusIndex !== null) {
+        setTimeout(() => {
+          const card = document.querySelector(`[data-global-index="${focusIndex}"]`);
+          if (card) {
+            card.classList.add("open", "highlight");
+            card.scrollIntoView({ behavior: "smooth", block: "center" });
+            setTimeout(() => card.classList.remove("highlight"), 1800);
+          }
+        }, 120);
+      }
     }
 
-    function renderAction(partner, logIndex, actionIndex, action) {
-      const key = `${partner}_${logIndex}_${actionIndex}`;
+    function renderWheelTimeline(logs) {
+      const container = $("timeline-container");
+      const nodes = $("wheel-nodes");
+      container.innerHTML = "";
+      nodes.innerHTML = "";
+
+      if (!logs.length) {
+        container.innerHTML = '<div class="empty">No conversations recorded for this partner yet.</div>';
+        $("arc-line").style.transform = "rotate(0deg)";
+        return;
+      }
+
+      const visibleNodes = Math.min(logs.length, 7);
+      for (let i = 0; i < visibleNodes; i++) {
+        const ratio = visibleNodes === 1 ? 0.5 : i / (visibleNodes - 1);
+        const angle = -62 + ratio * 124;
+        const radius = 218;
+        const cx = 88;
+        const cy = 260;
+        const x = cx + Math.cos(angle * Math.PI / 180) * radius;
+        const y = cy + Math.sin(angle * Math.PI / 180) * radius;
+
+        const node = document.createElement("div");
+        node.className = "wheel-node" + (i === 0 ? " active" : "");
+        node.style.setProperty("--x", `${x}px`);
+        node.style.setProperty("--y", `${y}px`);
+        node.textContent = i + 1;
+        nodes.appendChild(node);
+      }
+
+      logs.forEach((log, index) => {
+        const actions = parseItems(log.actionables);
+        const notes = String(log.notes || "").trim();
+        const deadline = log.deadline || log.actionDeadline || "";
+        const card = document.createElement("article");
+        card.className = "convo-card" + (focusedGlobalIndex === log.globalIndex ? " open highlight" : "");
+        card.dataset.globalIndex = log.globalIndex;
+
+        card.innerHTML = `
+          <div class="convo-date">${fmtDate(log.date)}</div>
+          <div class="convo-subject">${escapeHtml(log.subject || "Untitled conversation")}</div>
+
+          <div class="convo-actions">
+            <button class="mini-btn" onclick="toggleConvo(this)">Open</button>
+            <button class="mini-btn" onclick="startEdit(${log.globalIndex})">Edit note</button>
+          </div>
+
+          <div class="convo-body">
+            <div id="note-view-${log.globalIndex}">
+              <div class="mini-title">Notes</div>
+              <div class="notes">${notes ? escapeHtml(notes).replace(/\n/g, "<br>") : '<span style="color:rgba(5,6,8,0.62)">No notes recorded.</span>'}</div>
+              <div class="mini-title">Actionables ${deadline ? `· deadline ${fmtDate(deadline)}` : ""}</div>
+              <div class="checklist">
+                ${actions.length ? actions.map((action, actionIndex) => renderAction(log.partner, log.globalIndex, actionIndex, action)).join("") : '<span style="color:rgba(5,6,8,0.62);font-weight:800">No actionables recorded.</span>'}
+              </div>
+            </div>
+            <div id="edit-view-${log.globalIndex}" class="edit-panel" style="display:none">
+              <label class="label" style="color:rgba(5,6,8,0.72)">Subject</label>
+              <input class="input" style="background:rgba(255,255,255,0.55);color:#050608;border-color:rgba(5,6,8,0.28)" id="edit-subject-${log.globalIndex}" value="${escapeAttr(log.subject || "")}">
+              <label class="label" style="color:rgba(5,6,8,0.72)">Notes</label>
+              <textarea class="textarea" style="background:rgba(255,255,255,0.55);color:#050608;border-color:rgba(5,6,8,0.28)" id="edit-notes-${log.globalIndex}">${escapeHtml(log.notes || "")}</textarea>
+              <label class="label" style="color:rgba(5,6,8,0.72)">Actionables</label>
+              <textarea class="textarea" style="background:rgba(255,255,255,0.55);color:#050608;border-color:rgba(5,6,8,0.28)" id="edit-actions-${log.globalIndex}">${escapeHtml(log.actionables || "")}</textarea>
+              <label class="label" style="color:rgba(5,6,8,0.72)">Deadline</label>
+              <input class="input" type="date" style="background:rgba(255,255,255,0.55);color:#050608;border-color:rgba(5,6,8,0.28)" id="edit-deadline-${log.globalIndex}" value="${normalizeDate(deadline)}">
+              <div class="convo-actions">
+                <button class="mini-btn" onclick="saveEdit(${log.globalIndex})">Save edit</button>
+                <button class="mini-btn" onclick="cancelEdit(${log.globalIndex})">Cancel</button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      container.onscroll = updateWheelRotation;
+      updateWheelRotation();
+    }
+
+    function updateWheelRotation() {
+      const container = $("timeline-container");
+      const cards = [...container.querySelectorAll(".convo-card")];
+      if (!cards.length) return;
+
+      const progress = container.scrollTop / Math.max(1, container.scrollHeight - container.clientHeight);
+      $("arc-line").style.transform = `rotate(${progress * 130}deg)`;
+
+      let activeIndex = 0;
+      let best = Infinity;
+      const center = container.getBoundingClientRect().top + container.clientHeight * 0.35;
+
+      cards.forEach((card, index) => {
+        const rect = card.getBoundingClientRect();
+        const dist = Math.abs(rect.top - center);
+        if (dist < best) {
+          best = dist;
+          activeIndex = index;
+        }
+      });
+
+      document.querySelectorAll(".wheel-node").forEach((node, index) => {
+        node.classList.toggle("active", index === activeIndex % Math.max(1, document.querySelectorAll(".wheel-node").length));
+      });
+    }
+
+    function toggleConvo(button) {
+      button.closest(".convo-card").classList.toggle("open");
+      button.textContent = button.closest(".convo-card").classList.contains("open") ? "Close" : "Open";
+    }
+
+    function toggleComposer() {
+      $("compose-box").classList.toggle("active");
+      if ($("compose-box").classList.contains("active")) {
+        $("compose-box").scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }
+
+    function renderAction(partner, globalIndex, actionIndex, action) {
+      const key = `${partner}_${globalIndex}_${actionIndex}`;
       const done = !!checkedStates[key];
 
       return `
@@ -1494,25 +1743,57 @@
       el.classList.toggle("done");
       el.querySelector(".box").textContent = checkedStates[key] ? "✓" : "";
 
-      if ($("tasks-view").classList.contains("active")) {
-        renderTasks();
-      }
+      if ($("tasks-view").classList.contains("active")) renderTasks();
+      if ($("home-view").classList.contains("active")) renderHome();
+    }
 
-      if ($("home-view").classList.contains("active")) {
-        renderHome();
+    function startEdit(globalIndex) {
+      document.querySelector(`[data-global-index="${globalIndex}"]`)?.classList.add("open");
+      $(`note-view-${globalIndex}`).style.display = "none";
+      $(`edit-view-${globalIndex}`).style.display = "grid";
+    }
+
+    function cancelEdit(globalIndex) {
+      $(`note-view-${globalIndex}`).style.display = "";
+      $(`edit-view-${globalIndex}`).style.display = "none";
+    }
+
+    function saveEdit(globalIndex) {
+      const log = globalLogs[globalIndex];
+      if (!log) return;
+
+      log.subject = $(`edit-subject-${globalIndex}`).value.trim();
+      log.notes = $(`edit-notes-${globalIndex}`).value.trim();
+      log.actionables = $(`edit-actions-${globalIndex}`).value.trim();
+      log.deadline = $(`edit-deadline-${globalIndex}`).value;
+      log.actionDeadline = log.deadline;
+
+      openPartner(activePartner, globalIndex);
+      renderHome();
+      showToast("Edited locally");
+
+      try {
+        fetch(DATABASE_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...log, id: log.id, updateType: "edit" })
+        });
+      } catch (err) {
+        console.error(err);
       }
     }
 
     function getPendingTasks() {
       const tasks = [];
 
-      globalLogs.forEach((log, logIndex) => {
+      globalLogs.forEach((log, globalIndex) => {
         const partner = log.partner || "Unknown partner";
         const actions = parseItems(log.actionables);
         const deadline = log.deadline || log.actionDeadline || "";
 
         actions.forEach((action, actionIndex) => {
-          const key = `${partner}_${logIndex}_${actionIndex}`;
+          const key = `${partner}_${globalIndex}_${actionIndex}`;
 
           if (!checkedStates[key]) {
             tasks.push({
@@ -1522,7 +1803,8 @@
               subject: log.subject || "Untitled conversation",
               date: log.date || "",
               deadline,
-              due: isDue(deadline)
+              due: isDue(deadline),
+              globalIndex
             });
           }
         });
@@ -1554,15 +1836,20 @@
         <article class="task-card ${task.due ? "due" : ""}">
           <div class="task-main">
             <h3>${escapeHtml(task.action)}</h3>
-            <p>${escapeHtml(task.partner)} - ${escapeHtml(task.subject)}</p>
+            <p>${escapeHtml(task.partner)} · ${escapeHtml(task.subject)}</p>
           </div>
           <div class="task-meta">
             <span class="task-chip">${fmtDate(task.date)}</span>
             <span class="task-chip deadline">${task.deadline ? fmtDate(task.deadline) : "No deadline"}</span>
+            <button class="btn" onclick="jumpToTask('${escapeAttr(task.partner)}', ${task.globalIndex})">Open note</button>
             <button class="btn" onclick="completeTask('${escapeAttr(task.key)}')">Done</button>
           </div>
         </article>
       `).join("");
+    }
+
+    function jumpToTask(partner, globalIndex) {
+      openPartner(partner, globalIndex);
     }
 
     function completeTask(key) {
@@ -1584,17 +1871,18 @@
       if (!subject) return showToast("Subject is required");
 
       const payload = {
-        partner: activePartner,
-        date,
-        subject,
-        notes,
-        actionables,
-        deadline,
-        actionDeadline: deadline
-      };
-
-      globalLogs.unshift(payload);
-      openPartner(activePartner);
+  id: crypto.randomUUID(),
+  partner: activePartner,
+  date,
+  subject,
+  notes,
+  actionables,
+  deadline,
+  actionDeadline: deadline
+};
+      
+      globalLogs.push(payload);
+      openPartner(activePartner, globalLogs.length - 1);
       renderHome();
       showToast("Conversation saved locally");
 
@@ -1623,7 +1911,10 @@
     }
 
     function escapeAttr(value) {
-      return String(value ?? "").replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+      return String(value ?? "")
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'")
+        .replace(/"/g, "&quot;");
     }
   </script>
 </body>

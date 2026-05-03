@@ -29,15 +29,44 @@
         /* Login Screen */
         #login-view { text-align: center; margin-top: 15vh; }
         .login-box { background: rgba(255,255,255,0.1); padding: 40px; border-radius: 20px; display: inline-block; }
-        .login-box input { padding: 10px; border-radius: 5px; border: none; font-size: 16px; margin-right: 10px;}
+        .login-box input { padding: 10px; border-radius: 5px; border: none; font-size: 16px; margin-right: 10px; text-align: center;}
         .btn { background: var(--teal); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold;}
         
         /* Home Screen */
         .home-container { max-width: 900px; margin: 0 auto; text-align: center; }
-        .title { font-size: 48px; margin: 10px 0 40px; font-weight: 700; }
-        .search-bar { width: 100%; max-width: 500px; padding: 15px 20px; border-radius: 30px; border: none; font-size: 16px; margin-bottom: 30px; }
-        .partner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; max-height: 60vh; overflow-y: auto; padding: 10px;}
-        .partner-btn { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 15px 20px; border-radius: 30px; font-size: 16px; cursor: pointer; transition: 0.2s; text-align: left; }
+        .title { font-size: 48px; margin: 10px 0 40px; font-weight: 700; text-transform: uppercase;}
+        
+        /* Search Bar & Dropdown */
+        .search-container { position: relative; max-width: 500px; margin: 0 auto 50px auto; }
+        .search-bar { width: 100%; box-sizing: border-box; padding: 15px 20px; border-radius: 30px; border: none; font-size: 16px; outline: none; }
+        
+        .dropdown-content {
+            display: none; position: absolute; background-color: #ffffff; color: #333;
+            width: 100%; border-radius: 15px; margin-top: 5px; max-height: 250px; overflow-y: auto; z-index: 10;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2); text-align: left;
+        }
+        .dropdown-item { padding: 15px 20px; cursor: pointer; border-bottom: 1px solid #eee; font-weight: 600;}
+        .dropdown-item:hover { background-color: #f1f1f1; color: var(--teal);}
+
+        /* The 6 Buttons Grid */
+        .partner-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px; 
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .partner-btn { 
+            background: transparent; 
+            border: 2px solid rgba(255,255,255,0.3); 
+            color: white; 
+            padding: 20px; 
+            border-radius: 30px; 
+            font-size: 18px; 
+            font-weight: 600;
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
         .partner-btn:hover { background: rgba(255,255,255,0.1); border-color: white; }
 
         /* Flowchart Screen */
@@ -49,15 +78,14 @@
         /* Nodes */
         .convo-node { position: relative; margin-bottom: 30px; display: flex; cursor: pointer; }
         .node-number { position: absolute; left: -105px; width: 45px; height: 45px; background: white; color: black; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; border: 4px solid var(--bg-color); }
-        .convo-card { background: var(--teal); color: #000; padding: 20px; border-radius: 15px; min-width: 350px; }
-        .convo-date { font-weight: 700; font-size: 16px; }
+        .convo-card { background: var(--teal); color: #000; padding: 20px; border-radius: 15px; min-width: 350px; width: 100%; box-sizing: border-box;}
+        .convo-date { font-weight: 700; font-size: 16px; margin-bottom: 5px;}
         .convo-details { display: none; background: rgba(255,255,255,0.9); padding: 15px; border-radius: 10px; margin-top: 10px; font-size: 14px; }
         
         /* Inputs for New Log */
         .input-group { margin-top: 10px; }
-        .input-group input, .input-group textarea { width: 100%; margin-top: 5px; padding: 8px; box-sizing: border-box; border-radius: 5px; border: 1px solid #ccc; }
-        .add-convo-btn { background: transparent; color: white; border: none; font-size: 16px; font-weight: bold; cursor: pointer; margin-left: 20px; margin-top: 20px;}
-        #loader { display: none; color: var(--teal); font-weight: bold; margin-bottom: 20px; }
+        .input-group input, .input-group textarea { width: 100%; margin-top: 5px; padding: 10px; box-sizing: border-box; border-radius: 5px; border: 1px solid #ccc; font-family: 'Montserrat', sans-serif;}
+        #loader { display: none; color: var(--teal); font-weight: bold; margin-bottom: 20px; font-size: 18px; }
     </style>
 </head>
 <body>
@@ -65,9 +93,9 @@
     <!-- 1. LOGIN VIEW -->
     <div id="login-view" class="view active">
         <div class="login-box">
-            <h2>Partner Portal</h2>
-            <p>Please enter your PIN</p>
-            <input type="password" id="passcode" placeholder="Enter PIN">
+            <h2>Partner Repository</h2>
+            <p style="margin-bottom: 20px;">Please enter your PIN</p>
+            <input type="password" id="passcode" placeholder="****" maxlength="10">
             <button class="btn" onclick="handleLogin()">Enter</button>
         </div>
     </div>
@@ -75,11 +103,19 @@
     <!-- 2. HOME VIEW -->
     <div id="home-view" class="view">
         <div class="home-container">
+            <div style="font-size: 14px; letter-spacing: 2px; color: #ccc;">NEVER MISS A CONVO</div>
             <div class="title">PARTNER REPOSITORY</div>
             <div id="loader">Syncing with database...</div>
-            <input type="text" class="search-bar" id="searchInput" placeholder="🔍 Search for a partner..." onkeyup="filterPartners()">
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" id="searchInput" placeholder="🔍 Search for a partner..." autocomplete="off">
+                <div id="search-dropdown" class="dropdown-content">
+                    <!-- Dropdown suggestions populate here -->
+                </div>
+            </div>
+
             <div class="partner-grid" id="partner-grid">
-                <!-- Buttons populate here -->
+                <!-- Exactly 6 Buttons populate here -->
             </div>
         </div>
     </div>
@@ -101,16 +137,18 @@
 
     <script>
         // ==========================================
-        // PASTE YOUR GOOGLE WEB APP URL HERE:
+        // 1. PASTE YOUR GOOGLE WEB APP URL HERE:
         const DATABASE_URL = "https://script.google.com/u/0/home/projects/1OSfj2kxJYUqRodOh3ttm2c-ERUD1BW8xFBAgG1yq7gmR7ZsH3Eq7WAuS/edit"; 
+        
+        // 2. SET YOUR SECURE PIN HERE:
+        const SYSTEM_PIN = "924803"; 
         // ==========================================
 
-        const SYSTEM_PIN = "2026"; // Change this to your preferred PIN
         let globalPartners = [];
         let globalLogs = [];
         let activePartner = "";
 
-        // Navigation & Security
+        // Login Logic
         function handleLogin() {
             if(document.getElementById('passcode').value === SYSTEM_PIN) {
                 document.getElementById('login-view').classList.remove('active');
@@ -118,12 +156,19 @@
                 fetchData();
             } else {
                 alert("Incorrect PIN");
+                document.getElementById('passcode').value = ""; // clear box
             }
         }
+
+        // Add Enter key support for Login
+        document.getElementById('passcode').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') handleLogin();
+        });
 
         function goHome() {
             document.getElementById('partner-view').classList.remove('active');
             document.getElementById('home-view').classList.add('active');
+            document.getElementById('searchInput').value = ""; // clear search
         }
 
         // Fetch Data from Google Sheets
@@ -136,18 +181,22 @@
                 globalPartners = data.partners;
                 globalLogs = data.logs;
                 
-                renderPartners(globalPartners);
+                renderSixButtons(globalPartners);
             } catch (error) {
-                alert("Error connecting to database.");
+                alert("Error connecting to database. Please refresh.");
             }
             document.getElementById('loader').style.display = 'none';
         }
 
-        // Render Homepage Buttons
-        function renderPartners(partners) {
+        // Render Exactly 6 Buttons on the Homepage
+        function renderSixButtons(partners) {
             const grid = document.getElementById('partner-grid');
             grid.innerHTML = "";
-            partners.forEach(partner => {
+            
+            // Slice the array to only grab the first 6 partners
+            const topSix = partners.slice(0, 6);
+            
+            topSix.forEach(partner => {
                 const btn = document.createElement('button');
                 btn.className = 'partner-btn';
                 btn.textContent = partner;
@@ -156,12 +205,67 @@
             });
         }
 
-        // Search Bar Logic
-        function filterPartners() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
+        // --- NEW SEARCH LOGIC (Dropdown & Enter Key) ---
+        const searchInput = document.getElementById('searchInput');
+        const dropdown = document.getElementById('search-dropdown');
+
+        // As you type:
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            dropdown.innerHTML = ""; // clear previous suggestions
+            
+            if (!query) { 
+                dropdown.style.display = 'none'; 
+                return; 
+            }
+
+            // Find matching partners
             const filtered = globalPartners.filter(p => p.toLowerCase().includes(query));
-            renderPartners(filtered);
-        }
+            
+            if (filtered.length > 0) {
+                dropdown.style.display = 'block';
+                filtered.forEach(p => {
+                    const div = document.createElement('div');
+                    div.className = 'dropdown-item';
+                    div.textContent = p;
+                    // If clicked, open that partner
+                    div.onclick = () => {
+                        searchInput.value = p;
+                        dropdown.style.display = 'none';
+                        openPartnerFlowchart(p);
+                    };
+                    dropdown.appendChild(div);
+                });
+            } else {
+                dropdown.style.display = 'none';
+            }
+        });
+
+        // If you hit Enter:
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const query = this.value.toLowerCase();
+                if(!query) return;
+
+                // Find the first match
+                const match = globalPartners.find(p => p.toLowerCase().includes(query));
+                if (match) {
+                    searchInput.value = match;
+                    dropdown.style.display = 'none';
+                    openPartnerFlowchart(match);
+                } else {
+                    alert("No partner found matching that name.");
+                }
+            }
+        });
+
+        // Hide dropdown if clicked outside
+        document.addEventListener('click', function(e) {
+            if (e.target !== searchInput && e.target !== dropdown) {
+                dropdown.style.display = 'none';
+            }
+        });
+
 
         // Render Flowchart
         function openPartnerFlowchart(partnerName) {
@@ -185,8 +289,8 @@
                             <div class="convo-date">${new Date(log.date).toLocaleDateString()}</div>
                             <div><strong>Subject:</strong> ${log.subject}</div>
                             <div class="convo-details">
-                                <p><strong>Notes:</strong><br>${log.notes}</p>
-                                <p><strong>Actionables:</strong><br>${log.actionables}</p>
+                                <p><strong>Notes:</strong><br>${log.notes.replace(/\n/g, '<br>')}</p>
+                                <p><strong>Actionables:</strong><br>${log.actionables.replace(/\n/g, '<br>')}</p>
                             </div>
                         </div>
                     </div>
@@ -194,16 +298,15 @@
             });
 
             // Add the "New Log" creation node at the bottom
-            const newIndex = partnerLogs.length + 1;
             timeline.innerHTML += `
-                <div class="convo-node" style="margin-top:40px;">
-                    <div class="node-number" style="background:var(--teal); color:white;">+</div>
+                <div class="convo-node" style="margin-top:50px;">
+                    <div class="node-number" style="background:var(--teal); color:white; border-color:var(--teal);">+</div>
                     <div class="convo-card" style="background:#fff; color:#000;">
-                        <div class="convo-date">Log New Conversation</div>
+                        <div class="convo-date" style="color:var(--teal); font-size:20px;">Log New Conversation</div>
                         <div class="input-group"><input type="date" id="newDate"></div>
-                        <div class="input-group"><input type="text" id="newSubject" placeholder="Subject line..."></div>
-                        <div class="input-group"><textarea id="newNotes" placeholder="Conversation notes..."></textarea></div>
-                        <div class="input-group"><textarea id="newAction" placeholder="Actionables checklist..."></textarea></div>
+                        <div class="input-group"><input type="text" id="newSubject" placeholder="Subject line (e.g. Q3 Planning)..."></div>
+                        <div class="input-group"><textarea id="newNotes" rows="3" placeholder="Conversation notes..."></textarea></div>
+                        <div class="input-group"><textarea id="newAction" rows="3" placeholder="Actionables checklist..."></textarea></div>
                         <button class="btn" style="margin-top:15px; width:100%;" onclick="saveLog()">Save to Database</button>
                     </div>
                 </div>
@@ -224,7 +327,7 @@
             const notes = document.getElementById('newNotes').value;
             const action = document.getElementById('newAction').value;
 
-            if(!subject) { alert("Subject is required!"); return; }
+            if(!subject) { alert("Subject line is required to save a log!"); return; }
 
             const payload = { partner: activePartner, date: date, subject: subject, notes: notes, actionables: action };
             

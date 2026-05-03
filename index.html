@@ -59,22 +59,11 @@
     .view { display: none; }
     .view.active { display: block; }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      height: 28px;
-      padding: 0 10px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.045);
-      color: var(--acid);
-      font-size: 11px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      transform: skewX(-8deg);
+    .view-shell {
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
     }
-
-    .eyebrow span { transform: skewX(8deg); }
 
     .brand {
       display: inline-flex;
@@ -96,10 +85,91 @@
       clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
     }
 
-    .view-shell {
-      min-height: 100vh;
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      height: 28px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.045);
+      color: var(--acid);
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      transform: skewX(-8deg);
+    }
+
+    .eyebrow span { transform: skewX(8deg); }
+    .slash { color: var(--acid); text-shadow: 0 0 26px rgba(183,255,42,0.28); }
+
+    .btn {
       position: relative;
-      z-index: 1;
+      overflow: hidden;
+      height: 46px;
+      padding: 0 16px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      transition: 0.16s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(183,255,42,0.6);
+      background: rgba(183,255,42,0.1);
+    }
+
+    .btn-acid {
+      border: 0;
+      color: #050608;
+      background: linear-gradient(135deg, var(--acid), var(--cyan-hot));
+      box-shadow: 0 16px 34px rgba(24,240,210,0.17);
+    }
+
+    .label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .input, .textarea, .pin-field, .search-input {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #06090f;
+      color: var(--text);
+      outline: none;
+      transition: 0.16s ease;
+    }
+
+    .input {
+      height: 46px;
+      padding: 0 12px;
+      font-weight: 750;
+    }
+
+    .textarea {
+      min-height: 96px;
+      padding: 12px;
+      resize: vertical;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .input:focus, .textarea:focus, .pin-field:focus, .search-input:focus {
+      border-color: var(--acid);
+      box-shadow: 0 0 0 3px rgba(183,255,42,0.16);
+    }
+
+    .input::placeholder, .textarea::placeholder, .search-input::placeholder {
+      color: #647181;
     }
 
     #login-view.active {
@@ -133,8 +203,6 @@
     }
 
     .login-art h1 {
-      position: relative;
-      z-index: 1;
       max-width: 470px;
       margin-top: 30px;
       font-size: clamp(44px, 7vw, 78px);
@@ -143,14 +211,7 @@
       text-transform: uppercase;
     }
 
-    .slash {
-      color: var(--acid);
-      text-shadow: 0 0 26px rgba(183,255,42,0.28);
-    }
-
     .login-stat-row {
-      position: relative;
-      z-index: 1;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
@@ -207,27 +268,6 @@
       font-weight: 650;
     }
 
-    .label {
-      display: block;
-      margin-bottom: 7px;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 950;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .pin-field,
-    .input,
-    .textarea {
-      width: 100%;
-      border: 1px solid var(--line);
-      background: #06090f;
-      color: var(--text);
-      outline: none;
-      transition: 0.16s ease;
-    }
-
     .pin-field {
       height: 62px;
       padding: 0 18px;
@@ -235,54 +275,6 @@
       font-weight: 950;
       text-align: center;
       letter-spacing: 10px;
-    }
-
-    .input {
-      height: 46px;
-      padding: 0 12px;
-      font-weight: 750;
-    }
-
-    .textarea {
-      min-height: 96px;
-      padding: 12px;
-      resize: vertical;
-      font-weight: 700;
-      line-height: 1.45;
-    }
-
-    .pin-field:focus,
-    .input:focus,
-    .textarea:focus {
-      border-color: var(--acid);
-      box-shadow: 0 0 0 3px rgba(183,255,42,0.16);
-    }
-
-    .btn {
-      position: relative;
-      overflow: hidden;
-      height: 46px;
-      padding: 0 16px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid var(--line);
-      color: var(--text);
-      font-weight: 950;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      transition: 0.16s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      border-color: rgba(183,255,42,0.6);
-      background: rgba(183,255,42,0.1);
-    }
-
-    .btn-acid {
-      border: 0;
-      color: #050608;
-      background: linear-gradient(135deg, var(--acid), var(--cyan-hot));
-      box-shadow: 0 16px 34px rgba(24,240,210,0.17);
     }
 
     .btn-primary {
@@ -331,8 +323,7 @@
       transition: 0.16s ease;
     }
 
-    .nav-btn:hover,
-    .nav-btn.active {
+    .nav-btn:hover, .nav-btn.active {
       color: #050608;
       background: var(--acid);
       border-color: var(--acid);
@@ -487,24 +478,8 @@
 
     .search-input {
       height: 52px;
-      border: 1px solid var(--line);
-      background: #06090f;
-      color: var(--text);
-      outline: none;
       padding: 0 14px;
       font-weight: 850;
-      transition: 0.16s ease;
-    }
-
-    .search-input:focus {
-      border-color: var(--acid);
-      box-shadow: 0 0 0 3px rgba(183,255,42,0.13);
-    }
-
-    .search-input::placeholder,
-    .input::placeholder,
-    .textarea::placeholder {
-      color: #647181;
     }
 
     .dropdown {
@@ -777,9 +752,7 @@
       position: relative;
     }
 
-    .convo-card:nth-child(even) {
-      margin-right: 46px;
-    }
+    .convo-card:nth-child(even) { margin-right: 46px; }
 
     .convo-card:hover,
     .convo-card.highlight {
@@ -807,9 +780,7 @@
       border-top: 1px solid rgba(5,6,8,0.22);
     }
 
-    .convo-card.open .convo-body {
-      display: block;
-    }
+    .convo-card.open .convo-body { display: block; }
 
     .convo-actions {
       display: flex;
@@ -909,9 +880,7 @@
       padding: 18px;
     }
 
-    .compose.active {
-      display: block;
-    }
+    .compose.active { display: block; }
 
     .compose h2 {
       margin-bottom: 14px;
@@ -921,18 +890,8 @@
     }
 
     .field { margin-bottom: 12px; }
-
-    .save-btn {
-      width: 100%;
-      height: 50px;
-      margin-top: 4px;
-    }
-
-    .edit-panel {
-      display: grid;
-      gap: 10px;
-      margin-top: 12px;
-    }
+    .save-btn { width: 100%; height: 50px; margin-top: 4px; }
+    .edit-panel { display: grid; gap: 10px; margin-top: 12px; }
 
     .tasks-page { min-height: 100vh; }
 
@@ -1081,97 +1040,50 @@
     }
 
     @media (max-width: 960px) {
-      .login-shell,
-      .hero-grid,
-      .wheel-content {
-        grid-template-columns: 1fr;
-      }
-
-      .wheel-left {
-        display: none;
-      }
-
+      .login-shell, .hero-grid, .wheel-content { grid-template-columns: 1fr; }
+      .wheel-left { display: none; }
       .convo-stack {
         height: auto;
         overflow: visible;
         padding-right: 0;
       }
-
-      .convo-card,
-      .convo-card:nth-child(even),
-      .add-convo {
+      .convo-card, .convo-card:nth-child(even), .add-convo {
         margin-right: 0;
         margin-left: 0;
         width: 100%;
       }
-
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .task-card {
-        grid-template-columns: 1fr;
-      }
-
-      .task-meta {
-        justify-content: flex-start;
-      }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .task-card { grid-template-columns: 1fr; }
+      .task-meta { justify-content: flex-start; }
     }
 
     @media (max-width: 580px) {
-      .topbar,
-      .hero,
-      .search-block,
-      .content,
-      .partner-hero,
-      .wheel-wrap,
-      .tasks-hero,
-      .tasks-list {
+      .topbar, .hero, .search-block, .content, .partner-hero, .wheel-wrap, .tasks-hero, .tasks-list {
         padding-left: 18px;
         padding-right: 18px;
       }
-
       .topbar {
         align-items: flex-start;
         flex-direction: column;
       }
-
       .nav {
         width: 100%;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
       }
-
-      .nav-btn {
-        width: 100%;
-      }
-
-      .login-card,
-      .login-art {
-        padding: 28px;
-      }
-
-      .login-stat-row,
-      .grid,
-      .search-card {
-        grid-template-columns: 1fr;
-      }
-
-      .search-card .btn {
-        width: 100%;
-      }
-
+      .nav-btn { width: 100%; }
+      .login-card, .login-art { padding: 28px; }
+      .login-stat-row, .grid, .search-card { grid-template-columns: 1fr; }
+      .search-card .btn { width: 100%; }
       .partner-title-card {
         align-items: flex-start;
         flex-direction: column;
       }
-
-      .wheel-content {
-        padding: 14px;
-      }
+      .wheel-content { padding: 14px; }
     }
   </style>
 </head>
+
 <body>
   <section id="login-view" class="view active">
     <div class="login-shell">
@@ -1203,8 +1115,8 @@
     <header class="topbar">
       <div class="brand"><span class="brand-mark">P</span> Partner Repository</div>
       <nav class="nav">
-        <button class="nav-btn active" id="nav-dashboard" onclick="goHome()">Dashboard</button>
-        <button class="nav-btn" id="nav-tasks" onclick="openTasks()">Tasks</button>
+        <button class="nav-btn active" onclick="goHome()">Dashboard</button>
+        <button class="nav-btn" onclick="openTasks()">Tasks</button>
         <button class="nav-btn" onclick="logout()">Lock</button>
       </nav>
     </header>
@@ -1372,6 +1284,33 @@
 
     const $ = id => document.getElementById(id);
 
+    function makeId() {
+      if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+      return "log-" + Date.now() + "-" + Math.floor(Math.random() * 1000000);
+    }
+
+    function loadDataJsonp() {
+      return new Promise((resolve, reject) => {
+        const callbackName = "crmCallback_" + Date.now() + "_" + Math.floor(Math.random() * 100000);
+        const script = document.createElement("script");
+
+        window[callbackName] = data => {
+          delete window[callbackName];
+          script.remove();
+          resolve(data);
+        };
+
+        script.onerror = () => {
+          delete window[callbackName];
+          script.remove();
+          reject(new Error("JSONP request failed"));
+        };
+
+        script.src = DATABASE_URL + "?callback=" + encodeURIComponent(callbackName);
+        document.body.appendChild(script);
+      });
+    }
+
     function initials(name) {
       return String(name || "?").trim().split(/\s+/).slice(0, 2).map(word => word[0]).join("").toUpperCase();
     }
@@ -1434,13 +1373,16 @@
       $("grid-status").textContent = "Loading partners...";
 
       try {
-        const res = await fetch(DATABASE_URL, { redirect: "follow" });
-        const data = await res.json();
+        const data = await loadDataJsonp();
 
         if (data.error) throw new Error(data.error);
 
         globalPartners = Array.isArray(data.partners) ? data.partners : [];
         globalLogs = Array.isArray(data.logs) ? data.logs : [];
+
+        globalLogs.forEach(log => {
+          if (!log.id) log.id = makeId();
+        });
 
         renderHome();
         showToast("Partner data synced");
@@ -1453,9 +1395,11 @@
 
     function renderHome() {
       const pendingTasks = getPendingTasks();
+
       $("conversation-count").textContent = globalLogs.length;
       $("pending-count").textContent = pendingTasks.length;
       $("grid-status").textContent = globalPartners.length ? `${pendingTasks.length} pending tasks` : "No partners found";
+
       renderNearestTasks(pendingTasks);
 
       const grid = $("partner-grid");
@@ -1469,6 +1413,7 @@
       globalPartners.slice(0, 12).forEach(partner => {
         const logs = globalLogs.filter(log => log.partner === partner);
         const pending = pendingTasks.filter(task => task.partner === partner).length;
+
         const card = document.createElement("button");
         card.className = "partner-card";
         card.innerHTML = `
@@ -1488,7 +1433,9 @@
 
     function renderNearestTasks(tasks) {
       const box = $("nearest-tasks");
-      const dated = tasks.filter(task => task.deadline).sort((a, b) => normalizeDate(a.deadline).localeCompare(normalizeDate(b.deadline)));
+      const dated = tasks
+        .filter(task => task.deadline)
+        .sort((a, b) => normalizeDate(a.deadline).localeCompare(normalizeDate(b.deadline)));
 
       if (!dated.length) {
         $("nearest-deadline-label").textContent = "Nearest deadline";
@@ -1501,7 +1448,7 @@
 
       $("nearest-deadline-label").textContent = `Nearest deadline - ${fmtDate(nearest)}`;
       box.innerHTML = nearestTasks.map(task => `
-        <button class="nearest-task" onclick="jumpToTask('${escapeAttr(task.partner)}', ${task.globalIndex})">
+        <button class="nearest-task" onclick="jumpToTask('${escapeAttr(task.partner)}', '${escapeAttr(task.id)}')">
           ${escapeHtml(task.action)} · ${escapeHtml(task.partner)}
         </button>
       `).join("");
@@ -1566,17 +1513,16 @@
       return globalLogs
         .map((log, globalIndex) => ({ ...log, globalIndex }))
         .filter(log => log.partner === partnerName)
-        .sort((a, b) => {
-          const da = normalizeDate(a.date);
-          const db = normalizeDate(b.date);
-          return db.localeCompare(da);
-        });
+        .sort((a, b) => normalizeDate(b.date).localeCompare(normalizeDate(a.date)));
     }
 
-    function openPartner(partnerName, focusIndex = null) {
+    function openPartner(partnerName, focusId = null) {
       activePartner = partnerName;
-      focusedGlobalIndex = focusIndex;
+      focusedGlobalIndex = null;
+
       const logs = getPartnerLogs(partnerName);
+      const focusedLog = focusId ? logs.find(log => log.id === focusId) : null;
+      if (focusedLog) focusedGlobalIndex = focusedLog.globalIndex;
 
       $("partner-avatar").textContent = initials(partnerName);
       $("partner-title").textContent = partnerName;
@@ -1595,9 +1541,9 @@
 
       showView("partner-view");
 
-      if (focusIndex !== null) {
+      if (focusedGlobalIndex !== null) {
         setTimeout(() => {
-          const card = document.querySelector(`[data-global-index="${focusIndex}"]`);
+          const card = document.querySelector(`[data-global-index="${focusedGlobalIndex}"]`);
           if (card) {
             card.classList.add("open", "highlight");
             card.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -1610,6 +1556,7 @@
     function renderWheelTimeline(logs) {
       const container = $("timeline-container");
       const nodes = $("wheel-nodes");
+
       container.innerHTML = "";
       nodes.innerHTML = "";
 
@@ -1620,6 +1567,7 @@
       }
 
       const visibleNodes = Math.min(logs.length, 7);
+
       for (let i = 0; i < visibleNodes; i++) {
         const ratio = visibleNodes === 1 ? 0.5 : i / (visibleNodes - 1);
         const angle = -62 + ratio * 124;
@@ -1637,10 +1585,11 @@
         nodes.appendChild(node);
       }
 
-      logs.forEach((log, index) => {
+      logs.forEach((log) => {
         const actions = parseItems(log.actionables);
         const notes = String(log.notes || "").trim();
         const deadline = log.deadline || log.actionDeadline || "";
+
         const card = document.createElement("article");
         card.className = "convo-card" + (focusedGlobalIndex === log.globalIndex ? " open highlight" : "");
         card.dataset.globalIndex = log.globalIndex;
@@ -1660,18 +1609,23 @@
               <div class="notes">${notes ? escapeHtml(notes).replace(/\n/g, "<br>") : '<span style="color:rgba(5,6,8,0.62)">No notes recorded.</span>'}</div>
               <div class="mini-title">Actionables ${deadline ? `· deadline ${fmtDate(deadline)}` : ""}</div>
               <div class="checklist">
-                ${actions.length ? actions.map((action, actionIndex) => renderAction(log.partner, log.globalIndex, actionIndex, action)).join("") : '<span style="color:rgba(5,6,8,0.62);font-weight:800">No actionables recorded.</span>'}
+                ${actions.length ? actions.map((action, actionIndex) => renderAction(log.partner, log.id, actionIndex, action)).join("") : '<span style="color:rgba(5,6,8,0.62);font-weight:800">No actionables recorded.</span>'}
               </div>
             </div>
+
             <div id="edit-view-${log.globalIndex}" class="edit-panel" style="display:none">
               <label class="label" style="color:rgba(5,6,8,0.72)">Subject</label>
               <input class="input" style="background:rgba(255,255,255,0.55);color:#050608;border-color:rgba(5,6,8,0.28)" id="edit-subject-${log.globalIndex}" value="${escapeAttr(log.subject || "")}">
+
               <label class="label" style="color:rgba(5,6,8,0.72)">Notes</label>
               <textarea class="textarea" style="background:rgba(255,255,255,0.55);color:#050608;border-color:rgba(5,6,8,0.28)" id="edit-notes-${log.globalIndex}">${escapeHtml(log.notes || "")}</textarea>
+
               <label class="label" style="color:rgba(5,6,8,0.72)">Actionables</label>
               <textarea class="textarea" style="background:rgba(255,255,255,0.55);color:#050608;border-color:rgba(5,6,8,0.28)" id="edit-actions-${log.globalIndex}">${escapeHtml(log.actionables || "")}</textarea>
+
               <label class="label" style="color:rgba(5,6,8,0.72)">Deadline</label>
               <input class="input" type="date" style="background:rgba(255,255,255,0.55);color:#050608;border-color:rgba(5,6,8,0.28)" id="edit-deadline-${log.globalIndex}" value="${normalizeDate(deadline)}">
+
               <div class="convo-actions">
                 <button class="mini-btn" onclick="saveEdit(${log.globalIndex})">Save edit</button>
                 <button class="mini-btn" onclick="cancelEdit(${log.globalIndex})">Cancel</button>
@@ -1708,14 +1662,16 @@
         }
       });
 
-      document.querySelectorAll(".wheel-node").forEach((node, index) => {
-        node.classList.toggle("active", index === activeIndex % Math.max(1, document.querySelectorAll(".wheel-node").length));
+      const allNodes = document.querySelectorAll(".wheel-node");
+      allNodes.forEach((node, index) => {
+        node.classList.toggle("active", index === activeIndex % Math.max(1, allNodes.length));
       });
     }
 
     function toggleConvo(button) {
-      button.closest(".convo-card").classList.toggle("open");
-      button.textContent = button.closest(".convo-card").classList.contains("open") ? "Close" : "Open";
+      const card = button.closest(".convo-card");
+      card.classList.toggle("open");
+      button.textContent = card.classList.contains("open") ? "Close" : "Open";
     }
 
     function toggleComposer() {
@@ -1725,8 +1681,8 @@
       }
     }
 
-    function renderAction(partner, globalIndex, actionIndex, action) {
-      const key = `${partner}_${globalIndex}_${actionIndex}`;
+    function renderAction(partner, logId, actionIndex, action) {
+      const key = `${partner}_${logId}_${actionIndex}`;
       const done = !!checkedStates[key];
 
       return `
@@ -1762,49 +1718,48 @@
       const log = globalLogs[globalIndex];
       if (!log) return;
 
+      log.id = log.id || makeId();
       log.subject = $(`edit-subject-${globalIndex}`).value.trim();
       log.notes = $(`edit-notes-${globalIndex}`).value.trim();
       log.actionables = $(`edit-actions-${globalIndex}`).value.trim();
       log.deadline = $(`edit-deadline-${globalIndex}`).value;
       log.actionDeadline = log.deadline;
 
-      openPartner(activePartner, globalIndex);
+      openPartner(activePartner, log.id);
       renderHome();
       showToast("Edited locally");
 
-      try {
-        fetch(DATABASE_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...log, id: log.id, updateType: "edit" })
-        });
-      } catch (err) {
-        console.error(err);
-      }
+      fetch(DATABASE_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...log, updateType: "edit" })
+      }).catch(console.error);
     }
 
     function getPendingTasks() {
       const tasks = [];
 
-      globalLogs.forEach((log, globalIndex) => {
+      globalLogs.forEach((log) => {
+        log.id = log.id || makeId();
+
         const partner = log.partner || "Unknown partner";
         const actions = parseItems(log.actionables);
         const deadline = log.deadline || log.actionDeadline || "";
 
         actions.forEach((action, actionIndex) => {
-          const key = `${partner}_${globalIndex}_${actionIndex}`;
+          const key = `${partner}_${log.id}_${actionIndex}`;
 
           if (!checkedStates[key]) {
             tasks.push({
               key,
+              id: log.id,
               partner,
               action,
               subject: log.subject || "Untitled conversation",
               date: log.date || "",
               deadline,
-              due: isDue(deadline),
-              globalIndex
+              due: isDue(deadline)
             });
           }
         });
@@ -1841,15 +1796,15 @@
           <div class="task-meta">
             <span class="task-chip">${fmtDate(task.date)}</span>
             <span class="task-chip deadline">${task.deadline ? fmtDate(task.deadline) : "No deadline"}</span>
-            <button class="btn" onclick="jumpToTask('${escapeAttr(task.partner)}', ${task.globalIndex})">Open note</button>
+            <button class="btn" onclick="jumpToTask('${escapeAttr(task.partner)}', '${escapeAttr(task.id)}')">Open note</button>
             <button class="btn" onclick="completeTask('${escapeAttr(task.key)}')">Done</button>
           </div>
         </article>
       `).join("");
     }
 
-    function jumpToTask(partner, globalIndex) {
-      openPartner(partner, globalIndex);
+    function jumpToTask(partner, logId) {
+      openPartner(partner, logId);
     }
 
     function completeTask(key) {
@@ -1871,18 +1826,18 @@
       if (!subject) return showToast("Subject is required");
 
       const payload = {
-  id: crypto.randomUUID(),
-  partner: activePartner,
-  date,
-  subject,
-  notes,
-  actionables,
-  deadline,
-  actionDeadline: deadline
-};
-      
+        id: makeId(),
+        partner: activePartner,
+        date,
+        subject,
+        notes,
+        actionables,
+        deadline,
+        actionDeadline: deadline
+      };
+
       globalLogs.push(payload);
-      openPartner(activePartner, globalLogs.length - 1);
+      openPartner(activePartner, payload.id);
       renderHome();
       showToast("Conversation saved locally");
 
